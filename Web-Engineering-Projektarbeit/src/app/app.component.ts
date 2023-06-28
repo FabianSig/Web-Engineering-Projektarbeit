@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +9,13 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Web-Engineering-Projektarbeit';
 
-  constructor() { }
+  usernameOne = "";
+  usernameTwo = "";
+
+  constructor(private router: Router) { }
 
   goCompare(){
-    console.log("goCompare");	
+    console.log(this.test);	
+    //this.router.navigate(['/compare']);
   }
 }

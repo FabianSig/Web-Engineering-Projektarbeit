@@ -1,12 +1,12 @@
 <div id="searchbardiv">
   <mat-form-field appearance="fill">
     <mat-label>Username 1</mat-label>
-    <input matInput placeholder="">
+    <input [(ngModel)]="usernameOne" matInput placeholder="">
   </mat-form-field>
   <button mat-raised-button color="primary" (click)="goCompare()">Go!</button>
   <mat-form-field appearance="fill">
     <mat-label>Username 2</mat-label>
-    <input matInput placeholder="">
+    <input [(ngModel)]="usernameTwo" matInput placeholder="">
   </mat-form-field>
 
 </div>
