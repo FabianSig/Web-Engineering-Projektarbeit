@@ -10,17 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class UserProfileComponent {
 
-  @Input() username? :string;
-
-  userdata? :Userdata;
-  userdata$: Observable<Userdata>;
-
-  constructor(private userservice: UserserviceService) {
-
-    console.log(this.username);
-    this.userdata$ = userservice.getUser(this.username!)
-  }
-
+  @Input() userdata? :Userdata;
 
   //profilbild
   //beigetreten
@@ -33,7 +23,3 @@ export class UserProfileComponent {
   
 
 }
-function getUser(username: string | undefined): Userdata {
-  throw new Error('Function not implemented.');
-}
-

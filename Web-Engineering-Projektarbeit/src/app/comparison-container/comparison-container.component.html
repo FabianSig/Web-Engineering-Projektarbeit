@@ -1,3 +1,3 @@
 
-<app-user-profile [username]="usernameOne"></app-user-profile>
-<app-user-profile [username]="usernameTwo"></app-user-profile>
+<app-user-profile *ngIf="userdataOne$ | async as userdataOne" [userdata]="userdataOne"></app-user-profile>
+<app-user-profile *ngIf="userdataTwo$ | async as userdataTwo" [userdata]="userdataTwo"></app-user-profile>

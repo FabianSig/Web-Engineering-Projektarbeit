@@ -1,5 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable, map, switchMap } from 'rxjs';
+import { Userdata } from '../userdata';
+import { UserserviceService } from '../userservice.service';
 
 @Component({
   selector: 'app-comparison-container',
@@ -9,20 +12,37 @@ import { ActivatedRoute } from '@angular/router';
 export class ComparisonContainerComponent {
 
 
-  usernameOne? :string;
-  usernameTwo? :string;
+  usernameOne?: string;
+  usernameTwo?: string;
 
-  constructor(private route: ActivatedRoute) {
+  userdataOne?: Userdata;
+  userdataOne$: Observable<Userdata>;
+  userdataTwo?: Userdata;
+  userdataTwo$: Observable<Userdata>;
+
+  constructor(private route: ActivatedRoute, private userservice: UserserviceService) {
     this.route.params.subscribe(params => {
       this.usernameOne = params["nameone"];
-      this.usernameTwo = params["nametwo"]; 
-   });
+      this.usernameTwo = params["nametwo"];
+    });
 
-   console.log(this.usernameOne)
+    this.userdataOne$ = this.route.paramMap.pipe(
+      map(params => params.get('nameone')!),
+      switchMap(nameone => this.userservice.getUser(nameone))
+    )
+
+    this.userdataTwo$ = this.route.paramMap.pipe(
+      map(params => params.get('nametwo')!),
+      switchMap(nametwo => this.userservice.getUser(nametwo))
+    )
+
+
+
+    console.log(this.usernameOne)
   }
 
 
-  
+
 
 
 }
