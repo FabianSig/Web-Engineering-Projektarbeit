@@ -1,11 +1,10 @@
-<mat-card> 
-    
-    <mat-card-header *ngIf="userdata$ | async userdata">
+<mat-card *ngIf="userdata$ | async as userdata"> 
+    <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
         <mat-card-title> {{username}} </mat-card-title>
         <mat-card-subtitle> Beigetreten am:  </mat-card-subtitle>
       </mat-card-header>
-      <img mat-card-image src = "" + {{userdata.avatar_url}}  alt="Photo of a Shiba Inu">
+      <img mat-card-image [src]="userdata.avatar_url"   alt="Photo of a Shiba Inu">
       <mat-card-content>
         <p>
           The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.

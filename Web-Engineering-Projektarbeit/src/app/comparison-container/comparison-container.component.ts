@@ -8,19 +8,21 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ComparisonContainerComponent {
 
-  constructor(private route: ActivatedRoute) {}
 
   usernameOne? :string;
   usernameTwo? :string;
-  
-  ngOnInit() {
-    this.route.params.subscribe(params => {
-       this.usernameOne = params["nameone"];
-       this.usernameTwo = params["nametwo"]; // (+) converts string 'id' to a number
 
-       // In a real app: dispatch action to load the details here.
-    });
+  constructor(private route: ActivatedRoute) {
+    this.route.params.subscribe(params => {
+      this.usernameOne = params["nameone"];
+      this.usernameTwo = params["nametwo"]; 
+   });
+
+   console.log(this.usernameOne)
   }
+
+
+  
 
 
 }
