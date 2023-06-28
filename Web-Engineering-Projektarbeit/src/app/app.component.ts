@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Web-Engineering-Projektarbeit';
+
+  constructor() { }
+
+  goCompare(){
+    console.log("goCompare");	
+  }
 }
