@@ -10,13 +10,14 @@ import { Observable } from 'rxjs';
 })
 export class UserProfileComponent {
 
-  @Input() 
-  username? :string;
+  @Input() username? :string;
 
   userdata? :Userdata;
   userdata$: Observable<Userdata>;
 
   constructor(private userservice: UserserviceService) {
+
+    console.log(this.username);
     this.userdata$ = userservice.getUser(this.username!)
   }
 
