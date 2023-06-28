@@ -15,7 +15,6 @@ export class AppComponent {
   constructor(private router: Router) { }
 
   goCompare(){
-    console.log(this.test);	
-    //this.router.navigate(['/compare']);
+    this.router.navigate([`/compare/${this.usernameOne}/${this.usernameTwo}`]);
   }
 }

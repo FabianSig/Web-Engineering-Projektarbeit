@@ -4,7 +4,7 @@ import { ComparisonContainerComponent } from './comparison-container/comparison-
 
 const routes: Routes = [
   { path: '', pathMatch:'full', redirectTo: '' },
-  { path: 'compare/:nameone+:nametwo', component: ComparisonContainerComponent },
+  { path: 'compare/:nameone/:nametwo', component: ComparisonContainerComponent },
 ];
 
 @NgModule({
