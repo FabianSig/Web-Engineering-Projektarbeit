@@ -17,7 +17,7 @@ export class UserProfileComponent {
   userdata$: Observable<Userdata>;
 
   constructor(private userservice: UserserviceService) {
-    this.userdata$ = userservice.getUser(this.username?)
+    this.userdata$ = userservice.getUser(this.username!)
   }
 
 
