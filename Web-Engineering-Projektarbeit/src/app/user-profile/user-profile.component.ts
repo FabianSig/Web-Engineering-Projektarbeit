@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Userdata } from '../userdata';
 import { UserserviceService } from '../userservice.service';
 import { Observable } from 'rxjs';
@@ -8,11 +8,10 @@ import { Observable } from 'rxjs';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css']
 })
-export class UserProfileComponent {
+export class UserProfileComponent implements OnInit {
 
   @Input() userdata?: Userdata;
 
-  test = "dein mamer";
 
   //profilbild
   //beigetreten
@@ -23,5 +22,11 @@ export class UserProfileComponent {
   // achievments
   // letzter commit
   
+  constructor(){
+    
+  }
+  ngOnInit(): void {
+    console.log(this.userdata);
+  }
 
 }
