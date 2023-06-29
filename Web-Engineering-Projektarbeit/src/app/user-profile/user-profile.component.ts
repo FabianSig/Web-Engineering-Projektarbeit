@@ -10,7 +10,9 @@ import { Observable } from 'rxjs';
 })
 export class UserProfileComponent {
 
-  @Input() userdata? :Userdata;
+  @Input() userdata?: Userdata;
+
+  test = "dein mamer";
 
   //profilbild
   //beigetreten
