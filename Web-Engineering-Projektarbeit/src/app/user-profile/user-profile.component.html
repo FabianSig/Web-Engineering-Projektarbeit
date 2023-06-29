@@ -1,6 +1,6 @@
 <mat-card *ngIf="userdata"> 
     <mat-card-header>
-        <div mat-card-avatar class="example-header-image" style="background-image: url(userdata.avatar_url)";></div>
+        <img mat-card-avatar [src]="userdata.avatar_url" class="example-header-image">
         <mat-card-title> {{ userdata.login }} </mat-card-title>
         <mat-card-subtitle> Beigetreten am:  </mat-card-subtitle>
       </mat-card-header>
