@@ -1,0 +1,7 @@
+#comparisoncontainer {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 60%;
+    margin: auto;
+}

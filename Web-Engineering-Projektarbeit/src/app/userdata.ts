@@ -1,5 +1,5 @@
 export interface Userdata {
-    username: string;
+    login: string;
     avatar_url: string;
     followers: number;
     following: number;
