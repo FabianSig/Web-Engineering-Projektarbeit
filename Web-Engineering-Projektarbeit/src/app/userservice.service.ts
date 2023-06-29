@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { Userdata } from './userdata';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,20 @@ export class UserserviceService {
 
   constructor(private http: HttpClient) { }
 
-  getUser(username: string): Observable<Userdata>{
-    return this.http.get<Userdata>(`${this.apiUrl}/users/${username}`);
+  getUser(username: string): Observable<Userdata> {
+    return this.http.get<Userdata>(`${this.apiUrl}/users/${username}`).pipe(catchError(this.handleError));
+  }
+
+  handleError(error: HttpErrorResponse) {
+    if (error.status === 0) console.error("client error lol");
+    else if (error.status === 404) { 
+      console.error("user not found"); 
+      return throwError(() => new Error('User not found'));
+    }
+    else {
+      console.error(
+        `Backend returned code ${error.status}, body was: `, error.error);
+    }
+    return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 }
