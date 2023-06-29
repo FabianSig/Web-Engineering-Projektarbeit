@@ -36,9 +36,6 @@ export class ComparisonContainerComponent {
       switchMap(nametwo => this.userservice.getUser(nametwo))
     )
 
-
-
-    console.log(this.usernameOne)
   }
 
 
