@@ -4,4 +4,5 @@ export interface Userdata {
     followers: number;
     following: number;
     name: string;
+    created_at: string;
 }

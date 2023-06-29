@@ -3,7 +3,7 @@
         <img mat-card-avatar [src]="userdata.avatar_url" class="example-header-image">
         <mat-card-title> {{ userdata.login }} </mat-card-title>
         <mat-card-subtitle> {{ userdata.name }}</mat-card-subtitle>
-        <mat-card-subtitle> Beigetreten am:  </mat-card-subtitle>
+        <mat-card-subtitle> Beigetreten am: {{ userdata.created_at | date:'mediumDate'}} </mat-card-subtitle>
     </mat-card-header>
     <br>
       <mat-card-content>
