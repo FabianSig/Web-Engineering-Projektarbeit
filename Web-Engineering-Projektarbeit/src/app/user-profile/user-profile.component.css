@@ -3,3 +3,23 @@
         margin-bottom: 22px;
     }
   }
+
+  .comparison-item-row {
+    display: flex;
+  }
+
+  .comparison-item-row-icon {
+    height: 30px;
+    width: auto;
+    vertical-align: middle;
+   }
+
+  .comparison-item-row-title {
+    align-self: center;
+    margin-left: 8px;
+  }
+
+  .comparison-item-row-value {
+    align-self: center;
+    margin-left: auto;
+   }
