@@ -1,3 +1,7 @@
 export interface Contributions {
-    contributions_count: number;
+    contributions: Array<{
+        days: Array<{
+            count: number
+        }>
+    }>
 }

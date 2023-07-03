@@ -40,36 +40,7 @@ export class UserserviceService {
   }
 
   getContributions(username: string): Observable<Array<Contributions>> {
-    console.log(this.http.get<Array<Contributions>>(`https://skyline.github.com/${username}/2023.json`).pipe(catchError(this.handleError)));
     return this.http.get<Array<Contributions>>(`https://skyline.github.com/${username}/2023.json`).pipe(catchError(this.handleError));
   }
 
-  /*async getContributions(username: string) {
-    const body = {
-        "query": `query {
-            user(login: "${username}") {
-              name
-              contributionsCollection {
-                contributionCalendar {
-                  colors
-                  totalContributions
-                  weeks {
-                    contributionDays {
-                      color
-                      contributionCount
-                      date
-                      weekday
-                    }
-                    firstDay
-                  }
-                }
-              }
-            }
-          }`
-    }
-    const response = await fetch('https://api.github.com/graphql', { method: 'POST', body: JSON.stringify(body)})
-    const data = await response.json()
-    console.log(data)
-    return data
-}*/
 }

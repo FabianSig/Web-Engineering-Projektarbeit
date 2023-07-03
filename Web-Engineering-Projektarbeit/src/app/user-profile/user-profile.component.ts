@@ -14,6 +14,8 @@ export class UserProfileComponent implements OnInit {
 
   @Input() userdata?: Userdata;
   @Input() repositories?: Array<Repository>;
+  @Input() contributions?: Array<Contributions>;
+
   stargazers_count: number = 0;
 
 
@@ -38,6 +40,18 @@ export class UserProfileComponent implements OnInit {
     repos.forEach(repo => {
       count += repo.stargazers_count;
     });
+    return count;
+  }
+
+  countContributions(contributions: Array<Contributions>): number{
+    let count = 0;
+    contributions.forEach(contribution => {
+      contribution.contributions.forEach(contrib => {
+        contrib.days.forEach(day => {
+          count += day.count;
+        })
+      })
+    })
     return count;
   }
 

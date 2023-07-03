@@ -1,10 +1,16 @@
 <div id="comparisoncontainer">
-  <ng-container *ngIf="userreposOne$ | async as userreposOne">
-    <app-user-profile *ngIf="userdataOne$ | async as userdataOne; else notfound" [userdata]="userdataOne" [repositories]="userreposOne" [contributions]="userContributionsOne"></app-user-profile>
+  <ng-container *ngIf="userContributionsOne$ | async as userContributionsOne">
+    <ng-container *ngIf="userreposOne$ | async as userreposOne">
+      <app-user-profile *ngIf="userdataOne$ | async as userdataOne; else notfound" [userdata]="userdataOne" [repositories]="userreposOne" [contributions]="userContributionsOne"></app-user-profile>
+    </ng-container>
   </ng-container>
-  <ng-container *ngIf="userreposTwo$ | async as userreposTwo">
-    <app-user-profile *ngIf="userdataTwo$ | async as userdataTwo; else notfound" [userdata]="userdataTwo" [repositories]="userreposTwo"></app-user-profile>
+  
+  <ng-container *ngIf="userContributionsTwo$ | async as userContributionsTwo">
+    <ng-container *ngIf="userreposTwo$ | async as userreposTwo">
+      <app-user-profile *ngIf="userdataTwo$ | async as userdataTwo; else notfound" [userdata]="userdataTwo" [repositories]="userreposTwo"></app-user-profile>
+    </ng-container>
   </ng-container>
+  
   </div>
 
 <ng-template #notfound>

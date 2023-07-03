@@ -30,8 +30,8 @@ export class ComparisonContainerComponent {
   userContributionsOne?: Array<Contributions>;
   userContributionsOne$: Observable<Array<Contributions>>;
 
-  //userContributionsTwo?: Array<Contributions>;
-  //userContributionsTwo$: Observable<Array<Contributions>>;
+  userContributionsTwo?: Array<Contributions>;
+  userContributionsTwo$: Observable<Array<Contributions>>;
 
 
   constructor(private route: ActivatedRoute, private userservice: UserserviceService) {
@@ -63,6 +63,11 @@ export class ComparisonContainerComponent {
     this.userreposTwo$ = this.route.paramMap.pipe(
       map(params => params.get('nametwo')!),
       switchMap(nametwo => this.userservice.getRepositories(nametwo))
+    )
+
+    this.userContributionsTwo$ = this.route.paramMap.pipe(
+      map(params => params.get('nametwo')!),
+      switchMap(nametwo => this.userservice.getContributions(nametwo))
     )
 
   }
