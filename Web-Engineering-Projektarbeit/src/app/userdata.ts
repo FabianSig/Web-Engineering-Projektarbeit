@@ -5,4 +5,5 @@ export interface Userdata {
     following: number;
     name: string;
     created_at: string;
+    public_repos: number;
 }
