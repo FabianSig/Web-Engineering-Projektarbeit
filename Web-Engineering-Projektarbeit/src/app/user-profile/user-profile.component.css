@@ -6,12 +6,18 @@
 
   .comparison-item-row {
     display: flex;
+    min-height: 30px;
   }
 
   .comparison-item-row-icon {
     height: 30px;
     width: auto;
-    vertical-align: middle;
+    display:block;
+    margin:auto;
+  }
+
+   .comparison-item-row-icon-box {
+    min-width: 50px;
    }
 
   .comparison-item-row-title {
