@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ComparisonContainerComponent } from './comparison-container/comparison-container.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { HttpClientModule } from  '@angular/common/http';
+import { GraphQLModule } from './graphql.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { HttpClientModule } from  '@angular/common/http';
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    MatIconModule
+    MatIconModule,
+    GraphQLModule
   ],
   providers: [],
   bootstrap: [AppComponent]
