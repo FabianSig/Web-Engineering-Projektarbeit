@@ -3,6 +3,7 @@ import { Userdata } from '../userdata';
 import { UserserviceService } from '../userservice.service';
 import { Observable } from 'rxjs';
 import { Repository } from '../shared/repository';
+import { Contributions } from '../shared/contributions';
 
 @Component({
   selector: 'app-user-profile',
@@ -13,6 +14,7 @@ export class UserProfileComponent implements OnInit {
 
   @Input() userdata?: Userdata;
   @Input() repositories? : Array<Repository>;
+  @Input() contributions? : Array<Contributions>;
   stargazers_count: number = 0;
 
 
@@ -29,12 +31,10 @@ export class UserProfileComponent implements OnInit {
     
   }
   ngOnInit(): void {
-    console.log(this.userdata);
     this.stargazers_count = this.countStargazers(this.repositories!);
   }
 
   countStargazers(repos: Array<Repository>): number{
-    console.log(repos);
     let count = 0;
     repos.forEach(repo => {
       count += repo.stargazers_count;

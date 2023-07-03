@@ -3,6 +3,7 @@ import { Observable, catchError, throwError } from 'rxjs';
 import { Userdata } from './userdata';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Repository } from './shared/repository';
+import { Contributions } from './shared/contributions';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,11 @@ export class UserserviceService {
 
   getRepositories(username: string): Observable<Array<Repository>> {
     return this.http.get<Array<Repository>>(`${this.apiUrl}/users/${username}/repos`).pipe(catchError(this.handleError));
+  }
+
+  getContributions(username: string): Observable<Array<Contributions>> {
+    console.log(this.http.get<Array<Contributions>>(`https://skyline.github.com/${username}/2023.json`).pipe(catchError(this.handleError)));
+    return this.http.get<Array<Contributions>>(`https://skyline.github.com/${username}/2023.json`).pipe(catchError(this.handleError));
   }
 
   /*async getContributions(username: string) {

@@ -4,6 +4,7 @@ import { Observable, map, switchMap } from 'rxjs';
 import { Userdata } from '../userdata';
 import { UserserviceService } from '../userservice.service';
 import { Repository } from '../shared/repository';
+import { Contributions } from '../shared/contributions';
 
 @Component({
   selector: 'app-comparison-container',
@@ -26,6 +27,12 @@ export class ComparisonContainerComponent {
   userreposTwo?: Array<Repository>;
   userreposTwo$: Observable<Array<Repository>>;
 
+  userContributionsOne?: Array<Contributions>;
+  userContributionsOne$: Observable<Array<Contributions>>;
+
+  //userContributionsTwo?: Array<Contributions>;
+  //userContributionsTwo$: Observable<Array<Contributions>>;
+
 
   constructor(private route: ActivatedRoute, private userservice: UserserviceService) {
     this.route.params.subscribe(params => {
@@ -41,6 +48,11 @@ export class ComparisonContainerComponent {
     this.userreposOne$ = this.route.paramMap.pipe(
       map(params => params.get('nameone')!),
       switchMap(nameone => this.userservice.getRepositories(nameone))
+    )
+
+    this.userContributionsOne$ = this.route.paramMap.pipe(
+      map(params => params.get('nameone')!),
+      switchMap(nameone => this.userservice.getContributions(nameone))
     )
 
     this.userdataTwo$ = this.route.paramMap.pipe(
