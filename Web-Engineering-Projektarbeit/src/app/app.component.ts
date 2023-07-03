@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import {Title} from "@angular/platform-browser";
+
 
 @Component({
   selector: 'app-root',
@@ -12,7 +14,10 @@ export class AppComponent {
   usernameOne = "";
   usernameTwo = "";
 
-  constructor(private router: Router) { }
+
+  constructor(private router: Router, private titleService:Title) {
+    this.titleService.setTitle("GitCompare");
+   }
 
   goCompare(){
     this.router.navigate([`/compare/${this.usernameOne}/${this.usernameTwo}`]);
