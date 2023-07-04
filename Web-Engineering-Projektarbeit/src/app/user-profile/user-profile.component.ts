@@ -14,6 +14,7 @@ export class UserProfileComponent{
   @Input() userdata?: Userdata;
   @Input() stargazerCount?: number;
   @Input() contributionsCount?: number;
+  @Input() userWinarr?: boolean[];
 
   
 

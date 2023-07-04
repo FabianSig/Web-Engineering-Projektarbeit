@@ -29,6 +29,9 @@ export class ComparisonContainerComponent {
   userContributionsOneCount: number = 0;
   userContributionsTwoCount: number = 0;
 
+  userOneWinBoolArr: boolean[] = [false, false, false, false, false];
+  userTwoWinBoolArr: boolean[] = [false, false, false, false, false];
+
 
   constructor(private route: ActivatedRoute, private userservice: UserserviceService) {
     this.route.params.subscribe(params => {
@@ -39,33 +42,72 @@ export class ComparisonContainerComponent {
     this.route.paramMap.pipe(
       map(params => params.get('nameone')!),
       switchMap(nameone => this.userservice.getUser(nameone))
-    ).subscribe(userdata => this.userdataOne = userdata);
+    ).subscribe(userdata => {
+
+      this.userdataOne = userdata
+      this.route.paramMap.pipe(
+        map(params => params.get('nametwo')!),
+        switchMap(nametwo => this.userservice.getUser(nametwo))
+      ).subscribe(userdata =>{
+        
+        this.userdataTwo = userdata
+        this.userOneWinBoolArr[1] = this.userdataOne!.followers! > this.userdataTwo.followers;
+        this.userTwoWinBoolArr[1] = this.userdataOne!.followers! < this.userdataTwo.followers;
+
+        this.userOneWinBoolArr[3] = this.userdataOne!.public_repos! > this.userdataTwo.public_repos;
+        this.userTwoWinBoolArr[3] = this.userdataOne!.public_repos! < this.userdataTwo.public_repos;
+
+        this.userOneWinBoolArr[4] = this.userdataOne!.created_at > this.userdataOne!.created_at;
+        this.userOneWinBoolArr[4] = this.userdataOne!.created_at < this.userdataOne!.created_at;
+
+      });
+    });
+
+    
+    
+    
 
     this.route.paramMap.pipe(
       map(params => params.get('nameone')!),
       switchMap(nameone => this.userservice.getRepositories(nameone))
-    ).subscribe(repos => this.stargazerOneCount = this.countStargazers(repos));
+    ).subscribe(repos =>{ 
+
+      this.stargazerOneCount = this.countStargazers(repos)
+      this.route.paramMap.pipe(
+        map(params => params.get('nametwo')!),
+        switchMap(nametwo => this.userservice.getRepositories(nametwo))
+      ).subscribe(repos =>{ 
+
+        this.stargazerTwoCount = this.countStargazers(repos)
+        this.userOneWinBoolArr[2] = this.stargazerOneCount > this.stargazerTwoCount;
+        this.userTwoWinBoolArr[2] = this.stargazerOneCount < this.stargazerTwoCount;
+      });
+    });
 
     this.route.paramMap.pipe(
       map(params => params.get('nameone')!),
       switchMap(nameone => this.userservice.getContributions(nameone))
-    ).subscribe(contributions => this.userContributionsOneCount = this.countContributions(contributions));
+    ).subscribe(contributions =>{
 
-    this.route.paramMap.pipe(
-      map(params => params.get('nametwo')!),
-      switchMap(nametwo => this.userservice.getUser(nametwo))
-    ).subscribe(userdata => this.userdataTwo = userdata);
+      this.userContributionsOneCount = this.countContributions(contributions)
+      this.route.paramMap.pipe(
+        map(params => params.get('nametwo')!),
+        switchMap(nametwo => this.userservice.getContributions(nametwo))
+      ).subscribe(contributions =>{
 
-   this.route.paramMap.pipe(
-      map(params => params.get('nametwo')!),
-      switchMap(nametwo => this.userservice.getRepositories(nametwo))
-    ).subscribe(repos => this.stargazerTwoCount = this.countStargazers(repos));
+      this.userContributionsTwoCount = this.countContributions(contributions);
+      this.userOneWinBoolArr[0] = this.userContributionsOneCount > this.userContributionsTwoCount;
+      this.userTwoWinBoolArr[0] = this.userContributionsOneCount < this.userContributionsTwoCount;
 
-    this.route.paramMap.pipe(
-      map(params => params.get('nametwo')!),
-      switchMap(nametwo => this.userservice.getContributions(nametwo))
-    ).subscribe(contributions => this.userContributionsTwoCount = this.countContributions(contributions));
 
+    });
+  });
+
+
+
+
+
+    
   }
 
   countStargazers(repos: Array<Repository>): number{
@@ -86,6 +128,9 @@ export class ComparisonContainerComponent {
     return count;
   }
 
+  getUserDataOne(){
+
+  }
 
 
 
