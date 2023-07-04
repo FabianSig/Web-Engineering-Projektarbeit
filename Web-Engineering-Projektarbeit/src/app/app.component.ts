@@ -18,18 +18,16 @@ export class AppComponent {
   })
   
 
-
-  usernameOne = "";
-  usernameTwo = "";
-
-
   constructor(private router: Router, private titleService:Title, private fb: FormBuilder) {
     this.titleService.setTitle("GitCompare");
    }
 
   goCompare(){
     if(this.nameFormGroup.valid){
-      this.router.navigate([`/compare/${this.nameFormGroup.get("userOneControl")?.value}/${this.nameFormGroup.get("userTwoControl")?.value}`]);
+      this.router
+      .navigate(
+        [`/compare/${this.nameFormGroup.get("userOneControl")?.value}
+        /${this.nameFormGroup.get("userTwoControl")?.value}`]);
     }
   }
 }
