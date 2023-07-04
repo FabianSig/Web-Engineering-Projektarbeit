@@ -26,8 +26,7 @@ export class AppComponent {
     if(this.nameFormGroup.valid){
       this.router
       .navigate(
-        [`/compare/${this.nameFormGroup.get("userOneControl")?.value}
-        /${this.nameFormGroup.get("userTwoControl")?.value}`]);
+        [`/compare/${this.nameFormGroup.get("userOneControl")?.value}/${this.nameFormGroup.get("userTwoControl")?.value}`]);
     }
   }
 }
