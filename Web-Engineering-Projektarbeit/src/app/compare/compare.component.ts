@@ -1,26 +1,20 @@
 import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import {Title} from "@angular/platform-browser";
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-compare',
+  templateUrl: './compare.component.html',
+  styleUrls: ['./compare.component.css']
 })
-export class AppComponent {
-  title = 'Web-Engineering-Projektarbeit';
+export class CompareComponent {
+
+  constructor(private router: Router, private fb: FormBuilder){}
 
   nameFormGroup = this.fb.group({
     userOneControl: ['', Validators.required],
     userTwoControl: ['', Validators.required]
   })
-  
-
-  constructor(private router: Router, private titleService:Title, private fb: FormBuilder) {
-    this.titleService.setTitle("GitHub-Compare");
-   }
 
   goCompare(){
     if(this.nameFormGroup.valid){
@@ -29,5 +23,4 @@ export class AppComponent {
         [`/compare/${this.nameFormGroup.get("userOneControl")?.value}/${this.nameFormGroup.get("userTwoControl")?.value}`]);
     }
   }
-
 }

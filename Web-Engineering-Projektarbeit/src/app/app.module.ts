@@ -14,13 +14,15 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { HttpClientModule } from  '@angular/common/http';
 import { GraphQLModule } from './graphql.module';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { CompareComponent } from './compare/compare.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ComparisonContainerComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    CompareComponent
   ],
   imports: [
     MatToolbarModule,
