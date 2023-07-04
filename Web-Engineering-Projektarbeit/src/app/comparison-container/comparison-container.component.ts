@@ -14,9 +14,10 @@ import { Contribhistory } from '../shared/contribhistory';
 export class ComparisonContainerComponent {
 
 
+
   usernameOne?: string;
   usernameTwo?: string;
-
+  
   userdataOne?: Userdata;
   userdataOne$: Observable<Userdata>;
   userdataTwo?: Userdata;
