@@ -5,8 +5,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -31,7 +30,8 @@ import { GraphQLModule } from './graphql.module';
     FormsModule,
     HttpClientModule,
     MatIconModule,
-    GraphQLModule
+    GraphQLModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

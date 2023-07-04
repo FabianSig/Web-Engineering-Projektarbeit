@@ -13,8 +13,9 @@ import { Contributions } from '../shared/contributions';
 export class UserProfileComponent implements OnInit {
 
   @Input() userdata?: Userdata;
-  @Input() repositories? : Array<Repository>;
-  @Input() contributions? : Array<Contributions>;
+  @Input() repositories?: Array<Repository>;
+  @Input() contributions?: Array<Contributions>;
+
   stargazers_count: number = 0;
 
 
@@ -26,20 +27,32 @@ export class UserProfileComponent implements OnInit {
   // folgt
   // achievments
   // letzter commit
-  
+
   constructor(private userservice: UserserviceService){
-    
+
   }
   ngOnInit(): void {
     console.log(this.contributions);
     this.stargazers_count = this.countStargazers(this.repositories!);
-  }
+    }
 
   countStargazers(repos: Array<Repository>): number{
     let count = 0;
     repos.forEach(repo => {
       count += repo.stargazers_count;
     });
+    return count;
+  }
+
+  countContributions(contributions: Array<Contributions>): number{
+    let count = 0;
+    contributions.forEach(contribution => {
+      contribution.contributions.forEach(contrib => {
+        contrib.days.forEach(day => {
+          count += day.count;
+        })
+      })
+    })
     return count;
   }
 
