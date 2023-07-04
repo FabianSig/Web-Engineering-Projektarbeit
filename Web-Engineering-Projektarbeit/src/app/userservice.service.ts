@@ -40,7 +40,6 @@ export class UserserviceService {
   }
 
   getContributions(username: string): Observable<Array<Contributions>> {
-    console.log(this.http.get<Array<Contributions>>(`https://skyline.github.com/${username}/2023.json`).pipe(catchError(this.handleError)));
     return this.http.get<Array<Contributions>>(`https://skyline.github.com/${username}/2023.json`).pipe(catchError(this.handleError));
   }
 

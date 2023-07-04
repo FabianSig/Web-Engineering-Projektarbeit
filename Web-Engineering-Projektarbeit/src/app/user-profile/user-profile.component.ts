@@ -31,6 +31,7 @@ export class UserProfileComponent implements OnInit {
     
   }
   ngOnInit(): void {
+    console.log(this.contributions);
     this.stargazers_count = this.countStargazers(this.repositories!);
   }
 

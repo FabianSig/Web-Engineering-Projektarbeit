@@ -1,3 +1,3 @@
 export interface Contributions {
-    contributions_count: number;
+    contributions: Array<Array<number>>;
 }
