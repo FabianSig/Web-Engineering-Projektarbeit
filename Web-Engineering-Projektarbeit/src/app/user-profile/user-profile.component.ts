@@ -16,6 +16,7 @@ export class UserProfileComponent{
   @Input() stargazerCount?: number;
   @Input() contributionsCount?: number;
   @Input() userWinarr?: boolean[];
+  @Input() userScore?: number;
   wins: number = 0;
 
   

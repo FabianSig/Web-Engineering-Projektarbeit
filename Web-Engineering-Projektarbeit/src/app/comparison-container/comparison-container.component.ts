@@ -21,6 +21,8 @@ export class ComparisonContainerComponent implements OnInit{
   userdataOne?: Userdata;
   userdataTwo?: Userdata;
 
+  userScoreOne: number = 0;
+  userScoreTwo: number = 0;
 
 
   stargazerOneCount: number = 0;
@@ -29,25 +31,27 @@ export class ComparisonContainerComponent implements OnInit{
   userContributionsOneCount: number = 0;
   userContributionsTwoCount: number = 0;
 
-  userOneWinBoolArr: boolean[];
-  userTwoWinBoolArr: boolean[];
-
-  count: number = 0;
-
+  userOneWinBoolArr: boolean[] = [false, false, false, false, false];
+  userTwoWinBoolArr: boolean[] = [false, false, false, false, false];
 
   constructor(private route: ActivatedRoute, private userservice: UserserviceService) {
-  
-    this.userTwoWinBoolArr = [false, false, false, false, false, false];
-    this.userOneWinBoolArr = [false, false, false, false, false, false];
+    
+    this.userScoreOne = 0;
+    this.userScoreTwo = 0;
   }
+  
   ngOnInit(): void {
+
+    this.userTwoWinBoolArr = [false, false, false, false, false];
+    this.userOneWinBoolArr = [false, false, false, false, false];
+
+    this.userScoreOne = 0;
+    this.userScoreTwo = 0;
+
     this.route.params.subscribe(params => {
       this.usernameOne = params["nameone"];
       this.usernameTwo = params["nametwo"];
     });
-
-    this.userTwoWinBoolArr = [false, false, false, false, false, false];
-    this.userOneWinBoolArr = [false, false, false, false, false, false];
 
     this.route.paramMap.pipe(
       map(params => params.get('nameone')!),
@@ -66,10 +70,16 @@ export class ComparisonContainerComponent implements OnInit{
 
         this.userOneWinBoolArr[3] = this.userdataOne!.public_repos! > this.userdataTwo.public_repos;
         this.userTwoWinBoolArr[3] = this.userdataOne!.public_repos! < this.userdataTwo.public_repos;
+        
+        console.log("erstellt " + Date.parse(this.userdataOne!.created_at))
+        console.log("erstellt " + Date.parse(this.userdataTwo!.created_at))
 
-        this.userOneWinBoolArr[4] = Date.parse(this.userdataOne!.created_at) > Date.parse(this.userdataTwo!.created_at);
         this.userOneWinBoolArr[4] = Date.parse(this.userdataOne!.created_at) < Date.parse(this.userdataTwo!.created_at);
+        this.userTwoWinBoolArr[4] = Date.parse(this.userdataOne!.created_at) > Date.parse(this.userdataTwo!.created_at);
+        
 
+        console.log(this.userOneWinBoolArr[4])
+        console.log(this.userTwoWinBoolArr[4])
         this.route.paramMap.pipe(
           map(params => params.get('nameone')!),
           switchMap(nameone => this.userservice.getRepositories(nameone))
@@ -99,12 +109,10 @@ export class ComparisonContainerComponent implements OnInit{
               this.userContributionsTwoCount = this.countContributions(contributions);
               this.userOneWinBoolArr[0] = this.userContributionsOneCount > this.userContributionsTwoCount;
               this.userTwoWinBoolArr[0] = this.userContributionsOneCount < this.userContributionsTwoCount;
+                
+              console.log("hi")
 
-              this.count = 0;
-              this.userOneWinBoolArr.forEach(element => {if(element) this.count++;});
-
-              this.userOneWinBoolArr[5] = this.count > 2
-              this.userTwoWinBoolArr[5] = this.count <= 2;
+              this.userOneWinBoolArr.forEach(element => {element ? this.userScoreOne++ : this.userScoreTwo++;});
         
             });
 
