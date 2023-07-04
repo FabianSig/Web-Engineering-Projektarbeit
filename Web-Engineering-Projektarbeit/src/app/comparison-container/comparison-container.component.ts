@@ -4,7 +4,7 @@ import { Observable, map, switchMap } from 'rxjs';
 import { Userdata } from '../userdata';
 import { UserserviceService } from '../userservice.service';
 import { Repository } from '../shared/repository';
-import { Contributions } from '../shared/contributions';
+import { Contribhistory } from '../shared/contribhistory';
 
 @Component({
   selector: 'app-comparison-container',
@@ -27,11 +27,11 @@ export class ComparisonContainerComponent {
   userreposTwo?: Array<Repository>;
   userreposTwo$: Observable<Array<Repository>>;
 
-  userContributionsOne?: Array<Contributions>;
-  userContributionsOne$: Observable<Array<Contributions>>;
+  userContributionsOne?: Contribhistory;
+  userContributionsOne$: Observable<Contribhistory>;
 
-  userContributionsTwo?: Array<Contributions>;
-  userContributionsTwo$: Observable<Array<Contributions>>;
+  userContributionsTwo?: Contribhistory;
+  userContributionsTwo$: Observable<Contribhistory>;
 
 
   constructor(private route: ActivatedRoute, private userservice: UserserviceService) {

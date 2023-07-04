@@ -3,7 +3,7 @@ import { Userdata } from '../userdata';
 import { UserserviceService } from '../userservice.service';
 import { Observable } from 'rxjs';
 import { Repository } from '../shared/repository';
-import { Contributions } from '../shared/contributions';
+import { Contribhistory } from '../shared/contribhistory';
 
 @Component({
   selector: 'app-user-profile',
@@ -14,7 +14,7 @@ export class UserProfileComponent implements OnInit {
 
   @Input() userdata?: Userdata;
   @Input() repositories?: Array<Repository>;
-  @Input() contributions?: Array<Contributions>;
+  @Input() contributions?: Contribhistory;
 
   stargazers_count: number = 0;
 
@@ -43,14 +43,12 @@ export class UserProfileComponent implements OnInit {
     return count;
   }
 
-  countContributions(contributions: Array<Contributions>): number{
+  countContributions(contribhistory: Contribhistory): number{
     let count = 0;
-    contributions.forEach(contribution => {
-      contribution.contributions.forEach(contrib => {
-        contrib.days.forEach(day => {
-          count += day.count;
-        })
-      })
+    contribhistory.contributions.forEach(element => {
+      element.days.forEach(day => {
+        count += day.count;
+      });
     })
     return count;
   }
