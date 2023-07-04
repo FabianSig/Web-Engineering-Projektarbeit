@@ -9,12 +9,12 @@ import { Contribhistory } from '../shared/contribhistory';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css']
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent{
 
   @Input() userdata?: Userdata;
-  @Input() repositories?: Array<Repository>;
-  @Input() contributions?: Contribhistory;
-  stargazers_count: number = 0;
+  @Input() stargazerCount?: number;
+  @Input() contributionsCount?: number;
+
   
 
 
@@ -30,27 +30,6 @@ export class UserProfileComponent implements OnInit {
   constructor(private userservice: UserserviceService){
 
   }
-  ngOnInit(): void {
-    console.log(this.contributions);
-    this.stargazers_count = this.countStargazers(this.repositories!);
-    }
 
-  countStargazers(repos: Array<Repository>): number{
-    let count = 0;
-    repos.forEach(repo => {
-      count += repo.stargazers_count;
-    });
-    return count;
-  }
-
-  countContributions(contribhistory: Contribhistory): number{
-    let count = 0;
-    contribhistory.contributions.forEach(element => {
-      element.days.forEach(day => {
-        count += day.count;
-      });
-    })
-    return count;
-  }
 
 }

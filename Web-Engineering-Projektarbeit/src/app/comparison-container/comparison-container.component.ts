@@ -24,9 +24,14 @@ export class ComparisonContainerComponent {
   userreposOne?: Array<Repository>;
   userreposTwo?: Array<Repository>;
 
-  userContributionsOne?: Contribhistory;
+  stargazerOneCount: number = 0;
+  stargazerTwoCount: number = 0;
 
+  userContributionsOne?: Contribhistory;
   userContributionsTwo?: Contribhistory;
+
+  userContributionsOneCount: number = 0;
+  userContributionsTwoCount: number = 0;
 
 
   constructor(private route: ActivatedRoute, private userservice: UserserviceService) {
@@ -65,6 +70,30 @@ export class ComparisonContainerComponent {
       switchMap(nametwo => this.userservice.getContributions(nametwo))
     ).subscribe(contributions => this.userContributionsTwo = contributions);
 
+    this.stargazerOneCount = this.countStargazers(this.userreposOne!);
+    this.stargazerTwoCount = this.countStargazers(this.userreposTwo!);
+
+    this.userContributionsOneCount = this.countContributions(this.userContributionsOne!);
+    this.userContributionsTwoCount = this.countContributions(this.userContributionsTwo!);
+
+  }
+
+  countStargazers(repos: Array<Repository>): number{
+    let count = 0;
+    repos.forEach(repo => {
+      count += repo.stargazers_count;
+    });
+    return count;
+  }
+
+  countContributions(contribhistory: Contribhistory): number{
+    let count = 0;
+    contribhistory.contributions.forEach(element => {
+      element.days.forEach(day => {
+        count += day.count;
+      });
+    })
+    return count;
   }
 
 
