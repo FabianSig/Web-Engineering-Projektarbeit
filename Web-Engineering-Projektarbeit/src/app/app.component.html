@@ -1,7 +1,7 @@
 <mat-toolbar>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <mat-icon>favorite</mat-icon>
-  </button>
+  <div class="icon-box">
+    <img mat-card-image src="assets/img/github.png" class="icon">
+  </div>
   <span>GitHub-Compare</span>
   <span class="spacer"></span>
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
@@ -10,22 +10,11 @@
 </mat-toolbar>
 
 <br>
-<form [formGroup]="nameFormGroup" (ngSubmit)="goCompare()">
-  <div id="searchbardiv">
-    <mat-form-field appearance="fill">
-      <mat-label>Username 1</mat-label>
-      <input formControlName="userOneControl" matInput placeholder="">
-      <mat-error>Name wird benötigt</mat-error>
-    </mat-form-field>
-
-    <button mat-raised-button color="primary" type="submit" style="margin-top: 11px;">Go!</button>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Username 2</mat-label>
-      <input formControlName="userTwoControl" matInput placeholder="">
-      <mat-error>Name wird benötigt</mat-error>
-    </mat-form-field>
-  </div>
-</form>
 
 <router-outlet></router-outlet>
+
+<mat-toolbar class="footer">
+  <span style="font-size: 14px;">Made with &#10084; by Niko & Fabian</span>
+  <span class="spacer"></span>
+  <a style="margin:auto; font-size: 14px;" routerLink="/about" routerLinkActive="activebutton">About</a>
+</mat-toolbar>

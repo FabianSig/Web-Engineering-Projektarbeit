@@ -1,9 +1,14 @@
-#searchbardiv {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    width: 60%;
-    margin: auto;
+
+
+.icon-box{
+  min-width: 50px;
+}
+
+.icon{
+  height: 30px;
+  width: auto;
+  display:block;
+  margin:auto;
 }
 
 .spacer {
@@ -22,5 +27,11 @@
     button{
         margin-bottom: 22px;
     }
+  }
+
+
+  .footer {
+    position: fixed;
+    bottom: 0;
   }
 

@@ -1,4 +1,5 @@
-<mat-card *ngIf="userdata" [ngClass] ="{'winner': userScore! > 2}"> 
+
+<mat-card *ngIf="userdata" [ngClass] ="{'winner': userWinarr![5]}"> 
     <mat-card-header>
         <img mat-card-avatar [src]="userdata.avatar_url">
         <mat-card-title> {{ userdata.login }} </mat-card-title>
@@ -39,4 +40,3 @@
       </mat-card-content>
 </mat-card>
 
-{{userScore}}
