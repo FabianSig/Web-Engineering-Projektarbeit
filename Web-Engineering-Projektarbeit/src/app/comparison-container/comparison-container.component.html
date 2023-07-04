@@ -1,10 +1,10 @@
 <app-compare></app-compare>
 <div id="comparisoncontainer">
-  <app-user-profile [userdata]="userdataOne" [contributionsCount]="userContributionsOneCount"
+  <app-user-profile *ngIf="userdataOne?.login !== 'user not found'; else notfound" [userdata]="userdataOne" [contributionsCount]="userContributionsOneCount"
     [stargazerCount]="stargazerOneCount" [userWinarr]="userOneWinBoolArr"></app-user-profile>
 
 
-  <app-user-profile [userdata]="userdataTwo" [contributionsCount]="userContributionsTwoCount"
+  <app-user-profile *ngIf="userdataTwo; else notfound" [userdata]="userdataTwo" [contributionsCount]="userContributionsTwoCount"
     [stargazerCount]="stargazerTwoCount" [userWinarr]="userTwoWinBoolArr" ></app-user-profile>
 </div>
 

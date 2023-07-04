@@ -11,13 +11,13 @@ import { Contribhistory } from '../shared/contribhistory';
   templateUrl: './comparison-container.component.html',
   styleUrls: ['./comparison-container.component.css']
 })
-export class ComparisonContainerComponent implements OnInit{
+export class ComparisonContainerComponent implements OnInit {
 
 
 
   usernameOne?: string;
   usernameTwo?: string;
-  
+
   userdataOne?: Userdata;
   userdataTwo?: Userdata;
 
@@ -40,6 +40,7 @@ export class ComparisonContainerComponent implements OnInit{
     this.userTwoWinBoolArr = [false, false, false, false, false, false];
     this.userOneWinBoolArr = [false, false, false, false, false, false];
   }
+
   ngOnInit(): void {
 
     try{
@@ -135,7 +136,7 @@ export class ComparisonContainerComponent implements OnInit{
     return count;
   }
 
-  countContributions(contribhistory: Contribhistory): number{
+  countContributions(contribhistory: Contribhistory): number {
     let count = 0;
     contribhistory.contributions.forEach(element => {
       element.days.forEach(day => {
@@ -145,6 +146,7 @@ export class ComparisonContainerComponent implements OnInit{
     return count;
   }
 
+  getUserDataOne(){
 
 
 
