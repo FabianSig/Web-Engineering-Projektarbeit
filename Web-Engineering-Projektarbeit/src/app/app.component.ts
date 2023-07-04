@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import {Title} from "@angular/platform-browser";
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -11,15 +12,24 @@ import {Title} from "@angular/platform-browser";
 export class AppComponent {
   title = 'Web-Engineering-Projektarbeit';
 
+  nameFormGroup = this.fb.group({
+    userOneControl: ['', Validators.required],
+    userTwoControl: ['', Validators.required]
+  })
+  
+
+
   usernameOne = "";
   usernameTwo = "";
 
 
-  constructor(private router: Router, private titleService:Title) {
+  constructor(private router: Router, private titleService:Title, private fb: FormBuilder) {
     this.titleService.setTitle("GitCompare");
    }
 
   goCompare(){
-    this.router.navigate([`/compare/${this.usernameOne}/${this.usernameTwo}`]);
+    if(this.nameFormGroup.valid){
+      this.router.navigate([`/compare/${this.nameFormGroup.get("userOneControl")?.value}/${this.nameFormGroup.get("userTwoControl")?.value}`]);
+    }
   }
 }
