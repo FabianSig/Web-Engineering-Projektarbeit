@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, throwError } from 'rxjs';
 import { Userdata } from './userdata';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Repository } from './shared/repository';
@@ -26,7 +26,16 @@ export class UserserviceService {
     if (error.status === 0) console.error("client error lol");
     else if (error.status === 404) { 
       console.error("user not found"); 
-      return throwError(() => new Error('User not found'));
+      const _nouserdata = new BehaviorSubject<Userdata>({
+        login: "user not found",
+        avatar_url: "/assets/img/NoUser.png",
+        followers: 0,
+        following: 0,
+        name: "",
+        created_at: "",
+        public_repos: 0
+      })
+      return _nouserdata.asObservable();
     }
     else {
       console.error(
@@ -36,11 +45,41 @@ export class UserserviceService {
   }
 
   getRepositories(username: string): Observable<Array<Repository>> {
-    return this.http.get<Array<Repository>>(`${this.apiUrl}/users/${username}/repos`).pipe(catchError(this.handleError));
+    return this.http.get<Array<Repository>>(`${this.apiUrl}/users/${username}/repos`).pipe(catchError(this.handleRepoError));
+  }
+
+  handleRepoError(error: HttpErrorResponse){
+    if (error.status === 0) console.error("client error lol");
+    else {
+      return new BehaviorSubject<Array<Repository>>([
+        {
+          stargazers_count: 0
+        }
+      ])
+    }
+    return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 
   getContributions(username: string): Observable<Contribhistory> {
-    return this.http.get<Contribhistory>(`https://skyline.github.com/${username}/2023.json`).pipe(catchError(this.handleError));
+    return this.http.get<Contribhistory>(`https://skyline.github.com/${username}/2023.json`).pipe(catchError(this.handleContribError));
+  }
+
+  handleContribError(error: HttpErrorResponse){
+    if (error.status === 0) console.error("client error lol");
+    else {
+      return new BehaviorSubject<Contribhistory>({
+        contributions: [
+          {
+            days: [
+              {
+                count: 0
+              }
+            ]
+          }
+        ]
+      }).asObservable();
+    }
+    return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 
 }
