@@ -6,6 +6,17 @@
     margin: auto;
 }
 
+.icon-box{
+  min-width: 50px;
+}
+
+.icon{
+  height: 30px;
+  width: auto;
+  display:block;
+  margin:auto;
+}
+
 .spacer {
     flex: 1 1 auto;
   }
