@@ -1,32 +1,27 @@
 <div id="comparisoncontainer">
-  <ng-container *ngIf="userContributionsOne$ | async as userContributionsOne">
-    <ng-container *ngIf="userreposOne$ | async as userreposOne">
-      <app-user-profile *ngIf="userdataOne$ | async as userdataOne; else notfound" [userdata]="userdataOne" [repositories]="userreposOne" [contributions]="userContributionsOne"></app-user-profile>
-    </ng-container>
-  </ng-container>
-  
-  <ng-container *ngIf="userContributionsTwo$ | async as userContributionsTwo">
-    <ng-container *ngIf="userreposTwo$ | async as userreposTwo">
-      <app-user-profile *ngIf="userdataTwo$ | async as userdataTwo; else notfound" [userdata]="userdataTwo" [repositories]="userreposTwo" [contributions]="userContributionsTwo"></app-user-profile>
-    </ng-container>
-  </ng-container>
-  
-  </div>
+  <app-user-profile [userdata]="userdataOne" [repositories]="userreposOne"
+    [contributions]="userContributionsOne"></app-user-profile>
+
+
+  <app-user-profile [userdata]="userdataTwo" [repositories]="userreposTwo"
+    [contributions]="userContributionsTwo"></app-user-profile>
+</div>
 
 <ng-template #notfound>
-    <mat-card> 
-        <mat-card-header>
-            <img mat-card-avatar [src]="'assets/img/NoUser.png'" class="example-header-image">
-            <mat-card-title> Nutzer nicht gefunden </mat-card-title>
-            <mat-card-subtitle> </mat-card-subtitle>
-            <mat-card-subtitle> </mat-card-subtitle>
-        </mat-card-header>
-        <br>
-          <mat-card-content>
-            <p>
-              Hast du dich vertippt? Oder warst du ein Schlingel und hast absichtlich einen nicht existierenden Nutzer abgefragt?
-            </p>
-          </mat-card-content>
-    </mat-card>
-    
+  <mat-card>
+    <mat-card-header>
+      <img mat-card-avatar [src]="'assets/img/NoUser.png'" class="example-header-image">
+      <mat-card-title> Nutzer nicht gefunden </mat-card-title>
+      <mat-card-subtitle> </mat-card-subtitle>
+      <mat-card-subtitle> </mat-card-subtitle>
+    </mat-card-header>
+    <br>
+    <mat-card-content>
+      <p>
+        Hast du dich vertippt? Oder warst du ein Schlingel und hast absichtlich einen nicht existierenden Nutzer
+        abgefragt?
+      </p>
+    </mat-card-content>
+  </mat-card>
+
 </ng-template>

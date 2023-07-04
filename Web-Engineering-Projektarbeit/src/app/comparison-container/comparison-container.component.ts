@@ -18,20 +18,14 @@ export class ComparisonContainerComponent {
   usernameTwo?: string;
 
   userdataOne?: Userdata;
-  userdataOne$: Observable<Userdata>;
   userdataTwo?: Userdata;
-  userdataTwo$: Observable<Userdata>;
 
   userreposOne?: Array<Repository>;
-  userreposOne$: Observable<Array<Repository>>;
   userreposTwo?: Array<Repository>;
-  userreposTwo$: Observable<Array<Repository>>;
 
   userContributionsOne?: Contribhistory;
-  userContributionsOne$: Observable<Contribhistory>;
 
   userContributionsTwo?: Contribhistory;
-  userContributionsTwo$: Observable<Contribhistory>;
 
 
   constructor(private route: ActivatedRoute, private userservice: UserserviceService) {
@@ -40,35 +34,35 @@ export class ComparisonContainerComponent {
       this.usernameTwo = params["nametwo"];
     });
 
-    this.userdataOne$ = this.route.paramMap.pipe(
+    this.route.paramMap.pipe(
       map(params => params.get('nameone')!),
       switchMap(nameone => this.userservice.getUser(nameone))
-    )
+    ).subscribe(userdata => this.userdataOne = userdata);
 
-    this.userreposOne$ = this.route.paramMap.pipe(
+    this.route.paramMap.pipe(
       map(params => params.get('nameone')!),
       switchMap(nameone => this.userservice.getRepositories(nameone))
-    )
+    ).subscribe(repos => this.userreposOne = repos);
 
-    this.userContributionsOne$ = this.route.paramMap.pipe(
+    this.route.paramMap.pipe(
       map(params => params.get('nameone')!),
       switchMap(nameone => this.userservice.getContributions(nameone))
-    )
+    ).subscribe(contributions => this.userContributionsOne = contributions);
 
-    this.userdataTwo$ = this.route.paramMap.pipe(
+    this.route.paramMap.pipe(
       map(params => params.get('nametwo')!),
       switchMap(nametwo => this.userservice.getUser(nametwo))
-    )
+    ).subscribe(userdata => this.userdataTwo = userdata);
 
-    this.userreposTwo$ = this.route.paramMap.pipe(
+   this.route.paramMap.pipe(
       map(params => params.get('nametwo')!),
       switchMap(nametwo => this.userservice.getRepositories(nametwo))
-    )
+    ).subscribe(repos => this.userreposTwo = repos);
 
-    this.userContributionsTwo$ = this.route.paramMap.pipe(
+    this.route.paramMap.pipe(
       map(params => params.get('nametwo')!),
       switchMap(nametwo => this.userservice.getContributions(nametwo))
-    )
+    ).subscribe(contributions => this.userContributionsTwo = contributions);
 
   }
 
