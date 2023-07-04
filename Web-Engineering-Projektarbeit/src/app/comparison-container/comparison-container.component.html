@@ -1,9 +1,9 @@
 <div id="comparisoncontainer">
-  <app-user-profile [userdata]="userdataOne" [repositories]="userreposOne"
+  <app-user-profile *ngIf="userdataOne; else notfound" [userdata]="userdataOne" [repositories]="userreposOne"
     [contributions]="userContributionsOne"></app-user-profile>
 
 
-  <app-user-profile [userdata]="userdataTwo" [repositories]="userreposTwo"
+  <app-user-profile *ngIf="userdataTwo; else notfound" [userdata]="userdataTwo" [repositories]="userreposTwo"
     [contributions]="userContributionsTwo"></app-user-profile>
 </div>
 
