@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { Userdata } from '../userdata';
 import { UserserviceService } from '../userservice.service';
 import { Observable } from 'rxjs';
@@ -13,10 +13,14 @@ import { Contribhistory } from '../shared/contribhistory';
 export class UserProfileComponent implements OnInit {
 
   @Input() userdata?: Userdata;
+  @Input() otherUserdata?: Userdata;
   @Input() repositories?: Array<Repository>;
+  @Input() otherRepositories?: Array<Repository>;
   @Input() contributions?: Contribhistory;
-
+  @Input() otherContributions?: Contribhistory;
   stargazers_count: number = 0;
+  otherStargazers_count: number = 0;
+  
 
 
   //profilbild

@@ -19,7 +19,7 @@
             <img mat-card-image src="assets/img/follower.png" class="comparison-item-row-icon" style="height: 20px;">
           </div>
           <div class="comparison-item-row-title">Followers</div>
-          <span class="comparison-item-row-value">{{ userdata.followers }}</span>
+          <span class="comparison-item-row-value" [ngClass]="{'green' : userdata.followers > otherUserdata.followers}">{{ userdata.followers }}</span>
         </div>
         <div class="comparison-item-row">
           <div class="comparison-item-row-icon-box">

@@ -4,6 +4,10 @@
     }
   }
 
+  .green {
+    color: green;
+  }
+
   .comparison-item-row {
     display: flex;
     min-height: 30px;
