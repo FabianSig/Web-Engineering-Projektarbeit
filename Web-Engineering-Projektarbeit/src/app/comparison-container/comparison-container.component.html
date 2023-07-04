@@ -1,10 +1,10 @@
 <div id="comparisoncontainer">
-  <app-user-profile *ngIf="userdataOne; else notfound" [userdata]="userdataOne" [repositories]="userreposOne"
-    [contributions]="userContributionsOne"></app-user-profile>
+  <app-user-profile *ngIf="userdataOne; else notfound" [userdata]="userdataOne" [contributionsCount]="userContributionsOneCount"
+    [stargazerCount]="stargazerOneCount"></app-user-profile>
 
 
-  <app-user-profile *ngIf="userdataTwo; else notfound" [userdata]="userdataTwo" [repositories]="userreposTwo"
-    [contributions]="userContributionsTwo"></app-user-profile>
+  <app-user-profile *ngIf="userdataTwo; else notfound" [userdata]="userdataTwo" [contributionsCount]="userContributionsTwoCount"
+    [stargazerCount]="stargazerTwoCount"></app-user-profile>
 </div>
 
 <ng-template #notfound>

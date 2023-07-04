@@ -19,7 +19,7 @@ export class AppComponent {
   
 
   constructor(private router: Router, private titleService:Title, private fb: FormBuilder) {
-    this.titleService.setTitle("GitCompare");
+    this.titleService.setTitle("GitHub-Compare");
    }
 
   goCompare(){

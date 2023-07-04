@@ -13,6 +13,8 @@ import { ComparisonContainerComponent } from './comparison-container/comparison-
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { HttpClientModule } from  '@angular/common/http';
 import { GraphQLModule } from './graphql.module';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { GraphQLModule } from './graphql.module';
     UserProfileComponent
   ],
   imports: [
+    MatToolbarModule,
     MatCardModule,
     MatInputModule,
     MatButtonModule,
