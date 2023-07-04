@@ -5,10 +5,11 @@ import { AboutComponent } from './about/about.component';
 import { CompareComponent } from './compare/compare.component';
 
 const routes: Routes = [
-  { path: '', pathMatch:'full', redirectTo: '' },
+  { path: '', pathMatch:'full', redirectTo: '/compare' },
   { path: 'compare/:nameone/:nametwo', component: ComparisonContainerComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'compare', component: CompareComponent }
+  { path: 'compare', component: CompareComponent },
+  { path: '**', redirectTo: "/compare" }
 ];
 
 @NgModule({
