@@ -11,7 +11,7 @@ import { Contribhistory } from '../shared/contribhistory';
   templateUrl: './comparison-container.component.html',
   styleUrls: ['./comparison-container.component.css']
 })
-export class ComparisonContainerComponent {
+export class ComparisonContainerComponent implements OnInit{
 
 
 
@@ -36,6 +36,11 @@ export class ComparisonContainerComponent {
 
 
   constructor(private route: ActivatedRoute, private userservice: UserserviceService) {
+  
+    this.userTwoWinBoolArr = [false, false, false, false, false, false];
+    this.userOneWinBoolArr = [false, false, false, false, false, false];
+  }
+  ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.usernameOne = params["nameone"];
       this.usernameTwo = params["nametwo"];
@@ -95,6 +100,7 @@ export class ComparisonContainerComponent {
               this.userOneWinBoolArr[0] = this.userContributionsOneCount > this.userContributionsTwoCount;
               this.userTwoWinBoolArr[0] = this.userContributionsOneCount < this.userContributionsTwoCount;
 
+              this.count = 0;
               this.userOneWinBoolArr.forEach(element => {if(element) this.count++;});
 
               this.userOneWinBoolArr[5] = this.count > 2
@@ -109,18 +115,6 @@ export class ComparisonContainerComponent {
         
       });
     });
-
-    
-    
-    
-
-    
-
-
-
-
-
-    
   }
 
   countStargazers(repos: Array<Repository>): number{
