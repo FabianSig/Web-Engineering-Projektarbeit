@@ -1,9 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input} from '@angular/core';
 import { Userdata } from '../userdata';
 import { UserserviceService } from '../userservice.service';
-import { Repository } from '../shared/repository';
-import { Contribhistory } from '../shared/contribhistory';
-import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-user-profile',

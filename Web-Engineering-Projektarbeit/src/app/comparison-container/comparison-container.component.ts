@@ -145,9 +145,7 @@ export class ComparisonContainerComponent implements OnInit{
     return count;
   }
 
-  getUserDataOne(){
 
-  }
 
 
 

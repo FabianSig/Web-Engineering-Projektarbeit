@@ -15,10 +15,11 @@ import { HttpClientModule } from  '@angular/common/http';
 import { GraphQLModule } from './graphql.module';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { CompareComponent } from './compare/compare.component';
-
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
+    AboutComponent,
     AppComponent,
     ComparisonContainerComponent,
     UserProfileComponent,
