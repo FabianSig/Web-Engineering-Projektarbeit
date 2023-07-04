@@ -1,3 +1,19 @@
+<<<<<<< HEAD
+
+<div id="searchbardiv">
+  <mat-form-field appearance="fill">
+    <mat-label>Username 1</mat-label>
+    <input [(ngModel)]="usernameOne" matInput placeholder="" required>
+    <mat-error>Name wird benötigt</mat-error>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="goCompare()">Go!</button>
+  <mat-form-field appearance="fill">
+    <mat-label>Username 2</mat-label>
+    <input [(ngModel)]="usernameTwo" matInput placeholder="" required>
+    <mat-error>Name wird benötigt</mat-error>
+  </mat-form-field>
+</div>
+=======
 <form [formGroup]="nameFormGroup" (ngSubmit)="goCompare()">
   <div id="searchbardiv">
     <mat-form-field appearance="fill">
@@ -16,4 +32,5 @@
   </div>
 </form>
 
+>>>>>>> 0d4061cca205efced91f08260a1a3b16208f9c6c
 <router-outlet></router-outlet>
