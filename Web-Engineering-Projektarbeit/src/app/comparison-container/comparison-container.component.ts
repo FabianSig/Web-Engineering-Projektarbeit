@@ -21,14 +21,10 @@ export class ComparisonContainerComponent {
   userdataOne?: Userdata;
   userdataTwo?: Userdata;
 
-  userreposOne?: Array<Repository>;
-  userreposTwo?: Array<Repository>;
+
 
   stargazerOneCount: number = 0;
   stargazerTwoCount: number = 0;
-
-  userContributionsOne?: Contribhistory;
-  userContributionsTwo?: Contribhistory;
 
   userContributionsOneCount: number = 0;
   userContributionsTwoCount: number = 0;
@@ -48,12 +44,12 @@ export class ComparisonContainerComponent {
     this.route.paramMap.pipe(
       map(params => params.get('nameone')!),
       switchMap(nameone => this.userservice.getRepositories(nameone))
-    ).subscribe(repos => this.userreposOne = repos);
+    ).subscribe(repos => this.stargazerOneCount = this.countStargazers(repos));
 
     this.route.paramMap.pipe(
       map(params => params.get('nameone')!),
       switchMap(nameone => this.userservice.getContributions(nameone))
-    ).subscribe(contributions => this.userContributionsOne = contributions);
+    ).subscribe(contributions => this.userContributionsOneCount = this.countContributions(contributions));
 
     this.route.paramMap.pipe(
       map(params => params.get('nametwo')!),
@@ -63,18 +59,12 @@ export class ComparisonContainerComponent {
    this.route.paramMap.pipe(
       map(params => params.get('nametwo')!),
       switchMap(nametwo => this.userservice.getRepositories(nametwo))
-    ).subscribe(repos => this.userreposTwo = repos);
+    ).subscribe(repos => this.stargazerTwoCount = this.countStargazers(repos));
 
     this.route.paramMap.pipe(
       map(params => params.get('nametwo')!),
       switchMap(nametwo => this.userservice.getContributions(nametwo))
-    ).subscribe(contributions => this.userContributionsTwo = contributions);
-
-    this.stargazerOneCount = this.countStargazers(this.userreposOne!);
-    this.stargazerTwoCount = this.countStargazers(this.userreposTwo!);
-
-    this.userContributionsOneCount = this.countContributions(this.userContributionsOne!);
-    this.userContributionsTwoCount = this.countContributions(this.userContributionsTwo!);
+    ).subscribe(contributions => this.userContributionsTwoCount = this.countContributions(contributions));
 
   }
 
