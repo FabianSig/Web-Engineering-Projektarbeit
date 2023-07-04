@@ -3,6 +3,7 @@ import { Userdata } from '../userdata';
 import { UserserviceService } from '../userservice.service';
 import { Repository } from '../shared/repository';
 import { Contribhistory } from '../shared/contribhistory';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-user-profile',
@@ -15,22 +16,11 @@ export class UserProfileComponent{
   @Input() stargazerCount?: number;
   @Input() contributionsCount?: number;
   @Input() userWinarr?: boolean[];
+  wins: number = 0;
 
   
-
-
-  //profilbild
-  //beigetreten
-  //Commit anzahl
-  // öffentliche Repos
-  // follower
-  // folgt
-  // achievments
-  // letzter commit
-
   constructor(private userservice: UserserviceService){
 
   }
-
 
 }

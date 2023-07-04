@@ -1,4 +1,4 @@
-<mat-card *ngIf="userdata"> 
+<mat-card *ngIf="userdata" [ngClass] ="{'winner': userWinarr![5]}"> 
     <mat-card-header>
         <img mat-card-avatar [src]="userdata.avatar_url">
         <mat-card-title> {{ userdata.login }} </mat-card-title>

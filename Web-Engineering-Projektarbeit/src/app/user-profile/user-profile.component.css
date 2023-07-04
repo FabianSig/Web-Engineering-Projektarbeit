@@ -5,7 +5,7 @@
   }
 
   .green {
-    color: green;
+    color: #40C463;
   }
 
   .comparison-item-row {
@@ -34,7 +34,7 @@
     margin-left: auto;
    }
 
-   mat-card {
+   .winner {
     --angle: 0deg;
 
     border: 0.7vmin solid;
