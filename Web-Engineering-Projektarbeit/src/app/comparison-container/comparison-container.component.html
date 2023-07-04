@@ -1,10 +1,19 @@
 <div id="comparisoncontainer">
+<<<<<<< HEAD
   <app-user-profile [userdata]="userdataOne" [contributionsCount]="userContributionsOneCount"
     [stargazerCount]="stargazerOneCount" [userWinarr]="userOneWinBoolArr"></app-user-profile>
 
 
   <app-user-profile [userdata]="userdataTwo" [contributionsCount]="userContributionsTwoCount"
     [stargazerCount]="stargazerTwoCount" [userWinarr]="userTwoWinBoolArr"></app-user-profile>
+=======
+  <app-user-profile *ngIf="userdataOne; else notfound" [userdata]="userdataOne" [contributionsCount]="userContributionsOneCount"
+    [stargazerCount]="stargazerOneCount"></app-user-profile>
+
+
+  <app-user-profile *ngIf="userdataTwo; else notfound" [userdata]="userdataTwo" [contributionsCount]="userContributionsTwoCount"
+    [stargazerCount]="stargazerTwoCount"></app-user-profile>
+>>>>>>> 0c6f701424960d3ae2033cb6dab9b136936a4c26
 </div>
 
 <ng-template #notfound>
