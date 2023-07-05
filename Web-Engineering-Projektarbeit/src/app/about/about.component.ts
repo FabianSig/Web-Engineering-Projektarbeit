@@ -14,7 +14,7 @@ import { Contribhistory } from '../shared/contribhistory';
 export class AboutComponent {
   usernameOne: string = "fabiansig";
   usernameTwo?: string = "NikomitK";
-  
+
   userdataOne?: Userdata;
   userdataTwo?: Userdata;
 
@@ -33,56 +33,56 @@ export class AboutComponent {
 
 
   constructor(private route: ActivatedRoute, private userservice: UserserviceService) {
-  
+
     this.userTwoWinBoolArr = [false, false, false, false, false, false];
     this.userOneWinBoolArr = [false, false, false, false, false, false];
   }
   ngOnInit(): void {
 
-  
-      this.userTwoWinBoolArr = [false, false, false, false, false, false];
-      this.userOneWinBoolArr = [false, false, false, false, false, false];
-  
-      this.userservice.getUser('fabiansig')
+
+    this.userTwoWinBoolArr = [false, false, false, false, false, false];
+    this.userOneWinBoolArr = [false, false, false, false, false, false];
+
+    this.userservice.getUser('fabiansig')
       .subscribe(userdata => {
-  
+
         this.userdataOne = userdata
         this.userservice.getUser('nikomitk')
-        .subscribe(userdata =>{
-          
-          this.userdataTwo = userdata
-         
-          this.userservice.getRepositories('fabiansig')
-          .subscribe(repos =>{ 
-      
-            this.stargazerOneCount = this.countStargazers(repos)
-            this.userservice.getRepositories('nikomitk')
-            .subscribe(repos =>{ 
-      
-              this.stargazerTwoCount = this.countStargazers(repos)
-              this.userservice.getContributions('fabiansig')
-              .subscribe(contributions =>{
-          
-                this.userContributionsOneCount = this.countContributions(contributions)
-                this.userservice.getContributions('nikomitk')
-                .subscribe(contributions =>{
-          
-                this.userContributionsTwoCount = this.countContributions(contributions);
-               
-          
+          .subscribe(userdata => {
+
+            this.userdataTwo = userdata
+
+            this.userservice.getRepositories('fabiansig')
+              .subscribe(repos => {
+
+                this.stargazerOneCount = this.countStargazers(repos)
+                this.userservice.getRepositories('nikomitk')
+                  .subscribe(repos => {
+
+                    this.stargazerTwoCount = this.countStargazers(repos)
+                    this.userservice.getContributions('fabiansig')
+                      .subscribe(contributions => {
+
+                        this.userContributionsOneCount = this.countContributions(contributions)
+                        this.userservice.getContributions('nikomitk')
+                          .subscribe(contributions => {
+
+                            this.userContributionsTwoCount = this.countContributions(contributions);
+
+
+                          });
+
+                      });
+                  });
               });
-  
-            });
-            });
+
+
           });
-      
-          
-        });
       });
 
   }
 
-  countStargazers(repos: Array<Repository>): number{
+  countStargazers(repos: Array<Repository>): number {
     let count = 0;
     repos.forEach(repo => {
       count += repo.stargazers_count;
@@ -90,14 +90,11 @@ export class AboutComponent {
     return count;
   }
 
-  countContributions(contribhistory: Contribhistory): number{
-    let count = 0;
-    contribhistory.contributions.forEach(element => {
-      element.days.forEach(day => {
-        count += day.count;
-      });
-    })
-    return count;
+  countContributions(contribPage: string): number {
+    let position = contribPage.indexOf('<h2 class="f4 text-normal mb-2">')
+    if (position === -1) return 0;
+    let cutString = contribPage.substring(position + 39, position + 44).replaceAll(' ', '').replaceAll(',', '')
+    return parseInt(cutString);
   }
 
 }
