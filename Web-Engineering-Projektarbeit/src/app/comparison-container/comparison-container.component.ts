@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, map, switchMap } from 'rxjs';
+import { map, switchMap } from 'rxjs';
 import { Userdata } from '../userdata';
 import { UserserviceService } from '../userservice.service';
 import { Repository } from '../shared/repository';
-import { Contribhistory } from '../shared/contribhistory';
 
 @Component({
   selector: 'app-comparison-container',
@@ -120,6 +119,7 @@ export class ComparisonContainerComponent implements OnInit {
       });
 
   }
+
 
   countStargazers(repos: Array<Repository>): number {
     let count = 0;
