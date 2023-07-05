@@ -6,6 +6,7 @@ import { UserserviceService } from '../userservice.service';
 import { Repository } from '../shared/repository';
 import { Contribhistory } from '../shared/contribhistory';
 import confetti from 'canvas-confetti';
+import { Subscription } from 'apollo-angular';
 
 
 @Component({
@@ -36,6 +37,8 @@ export class ComparisonContainerComponent implements OnInit {
 
   count: number = 0;
 
+  destroy?: any;
+
 
   constructor(private route: ActivatedRoute, private userservice: UserserviceService) {
 
@@ -54,7 +57,7 @@ export class ComparisonContainerComponent implements OnInit {
       this.userTwoWinBoolArr = [false, false, false, false, false, false];
       this.userOneWinBoolArr = [false, false, false, false, false, false];
 
-      this.route.paramMap.pipe(
+     this.destroy = this.route.paramMap.pipe(
         map(params => params.get('nameone')!),
         switchMap(nameone => this.userservice.getUser(nameone))
       ).subscribe(userdata => {
@@ -109,6 +112,8 @@ export class ComparisonContainerComponent implements OnInit {
 
                   this.userOneWinBoolArr[5] = this.count > 2
                   this.userTwoWinBoolArr[5] = this.count <= 2;
+
+                  this.canon(0.65, 0.6)
                   
                 });
 
@@ -121,12 +126,20 @@ export class ComparisonContainerComponent implements OnInit {
       });
     }
 
+    
+
     catch (e: any) {
 
       console.log("Das ist die Nachricht: " + e.name)
       console.log("Das ist die Nachricht: " + e.message)
     }
 
+  }
+
+  ngOnDestroy(): void {
+    if(this.destroy){
+      this.destroy.unsubscribe();
+    }
   }
 
   countStargazers(repos: Array<Repository>): number {
