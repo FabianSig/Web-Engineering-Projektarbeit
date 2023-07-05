@@ -2,9 +2,7 @@ import { Component } from '@angular/core';
 import { Userdata } from '../shared/userdata';
 import { ActivatedRoute } from '@angular/router';
 import { UserserviceService } from '../shared/userservice.service';
-import { map, switchMap } from 'rxjs';
 import { Repository } from '../shared/repository';
-import { Contribhistory } from '../shared/contribhistory';
 
 @Component({
   selector: 'app-about',

@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ComparisonContainerComponent } from './comparison-container.component';
 
 describe('ComparisonContainerComponent', () => {
