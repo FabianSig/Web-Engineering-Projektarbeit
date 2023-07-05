@@ -109,9 +109,6 @@ export class ComparisonContainerComponent implements OnInit {
 
                   this.userOneWinBoolArr[5] = this.count > 2
                   this.userTwoWinBoolArr[5] = this.count <= 2;
-
-                  //this.canon(0.65, 0.6)
-                  
                 });
 
               });
@@ -139,17 +136,6 @@ export class ComparisonContainerComponent implements OnInit {
     let cutString = contribPage.substring(position + 39, position + 44).replaceAll(' ', '').replaceAll(',', '')
     return parseInt(cutString);
   }
-
-
-  public canon(x_coord: number, y_coord: number): void {
-    confetti({
-      particleCount: 100,
-      spread: 50,
-      origin: { x: x_coord, y: y_coord }
-    });
-}
-
-
 
 
 }
