@@ -52,17 +52,19 @@ export class ComparisonContainerComponent implements OnInit {
       this.userOneWinBoolArr[3] = this.userdataOne!.public_repos! > this.userdataTwo.public_repos;
       this.userOneWinBoolArr[4] = Date.parse(this.userdataOne!.created_at) < Date.parse(this.userdataTwo!.created_at);
       
-      let reposOne = await lastValueFrom(this.userservice.getRepositories(usernameOne));
-      this.stargazerOneCount = this.countStargazers(reposOne)
-      let reposTwo = await lastValueFrom(this.userservice.getRepositories(usernameTwo));
-      this.stargazerTwoCount = this.countStargazers(reposTwo)
+      let reposOne = lastValueFrom(this.userservice.getRepositories(usernameOne));
+      let reposTwo = lastValueFrom(this.userservice.getRepositories(usernameTwo));
+
+      let contribPageOne = lastValueFrom(this.userservice.getContributions(usernameOne));
+      let contribPageTwo = lastValueFrom(this.userservice.getContributions(usernameTwo));
+
+      
+      this.stargazerOneCount = this.countStargazers(await reposOne)
+      this.stargazerTwoCount = this.countStargazers(await reposTwo)
       this.userOneWinBoolArr[2] = this.stargazerOneCount > this.stargazerTwoCount;
 
-      let contribPageOne = await lastValueFrom(this.userservice.getContributions(usernameOne));
-      this.userContributionsOneCount = this.countContributions(contribPageOne)
-      let contribPageTwo = await lastValueFrom(this.userservice.getContributions(usernameTwo));
-      this.userContributionsTwoCount = this.countContributions(contribPageTwo);
-
+      this.userContributionsOneCount = this.countContributions(await contribPageOne)
+      this.userContributionsTwoCount = this.countContributions(await contribPageTwo);
       this.userOneWinBoolArr[0] = this.userContributionsOneCount > this.userContributionsTwoCount;
 
       this.count = 0;
