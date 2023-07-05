@@ -1,0 +1,10 @@
+{
+    "/contribs": {
+      "target": "https://github.com",
+      "secure": true,
+      "pathRewrite": {
+      "^/contribs": ""
+    },
+      "changeOrigin": true
+    }
+  }
