@@ -13,10 +13,13 @@
 
 <br>
 
-<router-outlet></router-outlet>
+<div class = "box">
+  <router-outlet></router-outlet>
+  
+  <mat-toolbar class="footer">
+    <span style="font-size: 14px;">Made with &#10084; by Niko & Fabian</span>
+    <span class="spacer"></span>
+    <a style="margin:auto; font-size: 14px;" routerLink="/about" routerLinkActive="activebutton">About</a>
+  </mat-toolbar>
 
-<mat-toolbar class="footer">
-  <span style="font-size: 14px;">Made with &#10084; by Niko & Fabian</span>
-  <span class="spacer"></span>
-  <a style="margin:auto; font-size: 14px;" routerLink="/about" routerLinkActive="activebutton">About</a>
-</mat-toolbar>
+</div>
