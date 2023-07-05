@@ -1,63 +1,64 @@
  @media only screen and (max-width: 768px) {
-    mat-card {
-        margin-bottom: 22px;
-    }
-  }
-mat-card{
-  transition: transform .2s;
-}
-
-  mat-card:hover {
-    transform: scale(1.05);
-  }
-
-  .green {
-    color: #40C463;
-  }
-
-  .comparison-item-row {
-    display: flex;
-    min-height: 30px;
-  }
-
-  .comparison-item-row-icon {
-    height: 30px;
-    width: auto;
-    display:block;
-    margin:auto;
-  }
-
-   .comparison-item-row-icon-box {
-    min-width: 50px;
+   mat-card {
+     margin-bottom: 22px;
    }
+ }
 
-  .comparison-item-row-title {
-    align-self: center;
-    margin-left: 8px;
-  }
+ mat-card {
+   transition: transform .2s;
+ }
 
-  .comparison-item-row-value {
-    align-self: center;
-    margin-left: auto;
+ mat-card:hover {
+   transform: scale(1.05);
+ }
+
+ .green {
+   color: #40C463;
+ }
+
+ .comparison-item-row {
+   display: flex;
+   min-height: 30px;
+ }
+
+ .comparison-item-row-icon {
+   height: 30px;
+   width: auto;
+   display: block;
+   margin: auto;
+ }
+
+ .comparison-item-row-icon-box {
+   min-width: 50px;
+ }
+
+ .comparison-item-row-title {
+   align-self: center;
+   margin-left: 8px;
+ }
+
+ .comparison-item-row-value {
+   align-self: center;
+   margin-left: auto;
+ }
+
+ .winner {
+   --angle: 0deg;
+
+   border: 0.7vmin solid;
+   border-image: conic-gradient(from var(--angle), red, yellow, lime, aqua, blue, magenta, red) 1;
+
+   animation: 2s rotate linear infinite;
+ }
+
+ @keyframes rotate {
+   to {
+     --angle: 360deg;
    }
+ }
 
-   .winner {
-    --angle: 0deg;
-
-    border: 0.7vmin solid;
-    border-image: conic-gradient(from var(--angle), red, yellow, lime, aqua, blue, magenta, red) 1;
-    
-    animation: 2s rotate linear infinite;
-  }
-  
-  @keyframes rotate {
-    to {
-      --angle: 360deg;
-    }
-  }
-  
-  @property --angle {
-    syntax: '<angle>';
-    initial-value: 0deg;
-    inherits: false;
-  }
+ @property --angle {
+   syntax: '<angle>';
+   initial-value: 0deg;
+   inherits: false;
+ }
