@@ -1,12 +1,7 @@
 ************************
 Refactor: 
 Structure DONE
-CSS
+CSS DONE
 HTML
 TypeScript
-
-
-
-
-
 ************************
