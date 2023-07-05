@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Userdata } from '../userdata';
+import { Userdata } from '../shared/userdata';
 import { ActivatedRoute } from '@angular/router';
-import { UserserviceService } from '../userservice.service';
+import { UserserviceService } from '../shared/userservice.service';
 import { map, switchMap } from 'rxjs';
 import { Repository } from '../shared/repository';
 import { Contribhistory } from '../shared/contribhistory';

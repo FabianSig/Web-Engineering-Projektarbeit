@@ -1,6 +1,6 @@
 import { Component, Input, OnInit} from '@angular/core';
-import { Userdata } from '../userdata';
-import { UserserviceService } from '../userservice.service';
+import { Userdata } from '../shared/userdata';
+import { UserserviceService } from '../shared/userservice.service';
 import { BehaviorSubject } from 'rxjs';
 import { bootstrapApplication } from '@angular/platform-browser';
 

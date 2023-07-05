@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, switchMap } from 'rxjs';
-import { Userdata } from '../userdata';
-import { UserserviceService } from '../userservice.service';
+import { Userdata } from '../shared/userdata';
+import { UserserviceService } from '../shared/userservice.service';
 import { Repository } from '../shared/repository';
 
 @Component({
