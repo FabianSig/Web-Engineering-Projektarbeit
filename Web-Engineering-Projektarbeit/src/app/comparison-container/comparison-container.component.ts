@@ -1,6 +1,6 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, switchMap } from 'rxjs';
+import { map, switchMap, lastValueFrom } from 'rxjs';
 import { Userdata } from '../shared/userdata';
 import { UserserviceService } from '../shared/userservice.service';
 import { Repository } from '../shared/repository';
@@ -11,11 +11,6 @@ import { Repository } from '../shared/repository';
   styleUrls: ['./comparison-container.component.css']
 })
 export class ComparisonContainerComponent implements OnInit {
-
-
-
-  usernameOne?: string;
-  usernameTwo?: string;
 
   userdataOne?: Userdata;
   userdataTwo?: Userdata;
@@ -33,9 +28,6 @@ export class ComparisonContainerComponent implements OnInit {
 
   count: number = 0;
 
-  destroy?: any;
-
-
   constructor(private route: ActivatedRoute, private userservice: UserserviceService) {
 
     this.userTwoWinBoolArr = [false, false, false, false, false, false];
@@ -43,81 +35,48 @@ export class ComparisonContainerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userTwoWinBoolArr = [false, false, false, false, false, false];
+    this.userOneWinBoolArr = [false, false, false, false, false, false];
 
-      this.route.params.subscribe(params => {
-        this.usernameOne = params["nameone"];
-        this.usernameTwo = params["nametwo"];
+    this.route.paramMap.pipe(
+      map(params => params.get('nameone')!),
+      switchMap(nameone => this.userservice.getUser(nameone))
+    ).subscribe(async userdata => {
+
+      let usernameOne = userdata.login;
+      this.userdataOne = userdata
+      let usernameTwo = this.route.snapshot.paramMap.get('nametwo')!;
+      this.userdataTwo = await lastValueFrom(this.userservice.getUser(usernameTwo));
+
+      this.userOneWinBoolArr[1] = this.userdataOne!.followers! > this.userdataTwo.followers;
+      this.userOneWinBoolArr[3] = this.userdataOne!.public_repos! > this.userdataTwo.public_repos;
+      this.userOneWinBoolArr[4] = Date.parse(this.userdataOne!.created_at) < Date.parse(this.userdataTwo!.created_at);
+      
+      let reposOne = await lastValueFrom(this.userservice.getRepositories(usernameOne));
+      this.stargazerOneCount = this.countStargazers(reposOne)
+      let reposTwo = await lastValueFrom(this.userservice.getRepositories(usernameTwo));
+      this.stargazerTwoCount = this.countStargazers(reposTwo)
+      this.userOneWinBoolArr[2] = this.stargazerOneCount > this.stargazerTwoCount;
+
+      let contribPageOne = await lastValueFrom(this.userservice.getContributions(usernameOne));
+      this.userContributionsOneCount = this.countContributions(contribPageOne)
+      let contribPageTwo = await lastValueFrom(this.userservice.getContributions(usernameTwo));
+      this.userContributionsTwoCount = this.countContributions(contribPageTwo);
+
+      this.userOneWinBoolArr[0] = this.userContributionsOneCount > this.userContributionsTwoCount;
+
+      this.count = 0;
+      this.userOneWinBoolArr.forEach((element, index) => { 
+        this.userTwoWinBoolArr[index] = !element;
+        if (element) this.count++; 
       });
 
-      this.userTwoWinBoolArr = [false, false, false, false, false, false];
-      this.userOneWinBoolArr = [false, false, false, false, false, false];
-
-     this.destroy = this.route.paramMap.pipe(
-        map(params => params.get('nameone')!),
-        switchMap(nameone => this.userservice.getUser(nameone))
-      ).subscribe(userdata => {
-
-        this.userdataOne = userdata
-        this.route.paramMap.pipe(
-          map(params => params.get('nametwo')!),
-          switchMap(nametwo => this.userservice.getUser(nametwo))
-        ).subscribe(userdata => {
-
-          this.userdataTwo = userdata
-          this.userOneWinBoolArr[1] = this.userdataOne!.followers! > this.userdataTwo.followers;
-          this.userTwoWinBoolArr[1] = this.userdataOne!.followers! < this.userdataTwo.followers;
-
-          this.userOneWinBoolArr[3] = this.userdataOne!.public_repos! > this.userdataTwo.public_repos;
-          this.userTwoWinBoolArr[3] = this.userdataOne!.public_repos! < this.userdataTwo.public_repos;
-
-          this.userOneWinBoolArr[4] = Date.parse(this.userdataOne!.created_at) < Date.parse(this.userdataTwo!.created_at);
-          this.userTwoWinBoolArr[4] = Date.parse(this.userdataOne!.created_at) > Date.parse(this.userdataTwo!.created_at);
-
-          this.route.paramMap.pipe(
-            map(params => params.get('nameone')!),
-            switchMap(nameone => this.userservice.getRepositories(nameone))
-          ).subscribe(repos => {
-
-            this.stargazerOneCount = this.countStargazers(repos)
-            this.route.paramMap.pipe(
-              map(params => params.get('nametwo')!),
-              switchMap(nametwo => this.userservice.getRepositories(nametwo))
-            ).subscribe(repos => {
+      this.userOneWinBoolArr[5] = this.count > 2
+      this.userTwoWinBoolArr[5] = this.count <= 2;
+    });
 
 
 
-              this.route.paramMap.pipe(
-                map(params => params.get('nameone')!),
-                switchMap(nameone => this.userservice.getContributions(nameone))
-              ).subscribe(contributions => {
-                this.userContributionsOneCount = this.countContributions(contributions)
-                this.route.paramMap.pipe(
-                  map(params => params.get('nametwo')!),
-                  switchMap(nametwo => this.userservice.getContributions(nametwo))
-                ).subscribe(contributions => {
-
-                  this.stargazerTwoCount = this.countStargazers(repos)
-                  this.userOneWinBoolArr[2] = this.stargazerOneCount > this.stargazerTwoCount;
-                  this.userTwoWinBoolArr[2] = this.stargazerOneCount < this.stargazerTwoCount;
-
-                  this.userContributionsTwoCount = this.countContributions(contributions);
-                  this.userOneWinBoolArr[0] = this.userContributionsOneCount > this.userContributionsTwoCount;
-                  this.userTwoWinBoolArr[0] = this.userContributionsOneCount < this.userContributionsTwoCount;
-
-                  this.count = 0;
-                  this.userOneWinBoolArr.forEach(element => { if (element) this.count++; });
-
-                  this.userOneWinBoolArr[5] = this.count > 2
-                  this.userTwoWinBoolArr[5] = this.count <= 2;
-                });
-
-              });
-            });
-          });
-
-
-        });
-      });
 
   }
 
