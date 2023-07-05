@@ -32,6 +32,7 @@
         margin: auto;
     }
     .footer{
+      display: none;
       position: relative;
       
     }
