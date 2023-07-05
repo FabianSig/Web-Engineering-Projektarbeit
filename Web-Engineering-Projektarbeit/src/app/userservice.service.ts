@@ -56,7 +56,7 @@ export class UserserviceService {
   }
 
   getContributions(username: string): Observable<string> {
-    return this.http.get(`https://github.com/users/${username}/contributions`, { responseType: 'text' }).pipe(catchError(this.handleContribError));
+    return this.http.get(`/contribs/users/${username}/contributions`, { responseType: 'text' }).pipe(catchError(this.handleContribError));
   }
 
   handleContribError(error: HttpErrorResponse) {
