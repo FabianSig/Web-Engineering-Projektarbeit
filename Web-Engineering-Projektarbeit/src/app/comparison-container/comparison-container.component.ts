@@ -5,6 +5,8 @@ import { Userdata } from '../userdata';
 import { UserserviceService } from '../userservice.service';
 import { Repository } from '../shared/repository';
 import { Contribhistory } from '../shared/contribhistory';
+import confetti from 'canvas-confetti';
+
 
 @Component({
   selector: 'app-comparison-container',
@@ -107,7 +109,7 @@ export class ComparisonContainerComponent implements OnInit {
 
                   this.userOneWinBoolArr[5] = this.count > 2
                   this.userTwoWinBoolArr[5] = this.count <= 2;
-
+                  
                 });
 
               });
@@ -143,6 +145,13 @@ export class ComparisonContainerComponent implements OnInit {
   }
 
 
+  public canon(x_coord: number, y_coord: number): void {
+    confetti({
+      particleCount: 100,
+      spread: 50,
+      origin: { x: x_coord, y: y_coord }
+    });
+}
 
 
 
