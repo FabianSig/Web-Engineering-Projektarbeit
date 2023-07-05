@@ -43,7 +43,6 @@ export class ComparisonContainerComponent implements OnInit {
 
   ngOnInit(): void {
 
-    try {
       this.route.params.subscribe(params => {
         this.usernameOne = params["nameone"];
         this.usernameTwo = params["nametwo"];
@@ -84,9 +83,7 @@ export class ComparisonContainerComponent implements OnInit {
               switchMap(nametwo => this.userservice.getRepositories(nametwo))
             ).subscribe(repos => {
 
-              this.stargazerTwoCount = this.countStargazers(repos)
-              this.userOneWinBoolArr[2] = this.stargazerOneCount > this.stargazerTwoCount;
-              this.userTwoWinBoolArr[2] = this.stargazerOneCount < this.stargazerTwoCount;
+
 
               this.route.paramMap.pipe(
                 map(params => params.get('nameone')!),
@@ -97,6 +94,10 @@ export class ComparisonContainerComponent implements OnInit {
                   map(params => params.get('nametwo')!),
                   switchMap(nametwo => this.userservice.getContributions(nametwo))
                 ).subscribe(contributions => {
+
+                  this.stargazerTwoCount = this.countStargazers(repos)
+                  this.userOneWinBoolArr[2] = this.stargazerOneCount > this.stargazerTwoCount;
+                  this.userTwoWinBoolArr[2] = this.stargazerOneCount < this.stargazerTwoCount;
 
                   this.userContributionsTwoCount = this.countContributions(contributions);
                   this.userOneWinBoolArr[0] = this.userContributionsOneCount > this.userContributionsTwoCount;
@@ -117,13 +118,6 @@ export class ComparisonContainerComponent implements OnInit {
 
         });
       });
-    }
-
-    catch (e: any) {
-
-      console.log("Das ist die Nachricht: " + e.name)
-      console.log("Das ist die Nachricht: " + e.message)
-    }
 
   }
 
