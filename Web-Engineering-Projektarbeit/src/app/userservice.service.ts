@@ -22,7 +22,7 @@ export class UserserviceService {
     else if (error.status === 404 || error.status === 403) {
       console.error("user not found");
       const _nouserdata = new BehaviorSubject<Userdata>({
-        login: "user not found",
+        login: "Nutzer nicht gefunden",
         avatar_url: "/assets/img/NoUser.png",
         followers: 0,
         following: 0,
