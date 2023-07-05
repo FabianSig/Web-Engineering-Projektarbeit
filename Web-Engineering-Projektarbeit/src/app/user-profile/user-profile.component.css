@@ -3,6 +3,13 @@
         margin-bottom: 22px;
     }
   }
+mat-card{
+  transition: transform .2s;
+}
+
+  mat-card:hover {
+    transform: scale(1.05);
+  }
 
   .green {
     color: #40C463;

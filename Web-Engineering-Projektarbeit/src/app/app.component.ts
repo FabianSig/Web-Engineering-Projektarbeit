@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {Title} from "@angular/platform-browser";
 import { FormBuilder, Validators } from '@angular/forms';
 
@@ -19,7 +19,9 @@ export class AppComponent {
   
 
   constructor(private router: Router, private titleService:Title, private fb: FormBuilder) {
+    console.log(this.router.url)
     this.titleService.setTitle("GitHub-Compare");
+
    }
 
   goCompare(){
