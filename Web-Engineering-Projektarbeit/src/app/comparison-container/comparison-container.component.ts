@@ -4,6 +4,7 @@ import { map, switchMap, lastValueFrom } from 'rxjs';
 import { Userdata } from '../shared/userdata';
 import { UserserviceService } from '../shared/userservice.service';
 import { Repository } from '../shared/repository';
+import { ProfileData } from '../shared/profile-data';
 
 @Component({
   selector: 'app-comparison-container',
@@ -12,24 +13,13 @@ import { Repository } from '../shared/repository';
 })
 export class ComparisonContainerComponent implements OnInit {
 
-  userdataOne?: Userdata;
-  userdataTwo?: Userdata;
-
-
-
-  stargazerOneCount: number = 0;
-  stargazerTwoCount: number = 0;
-
-  userContributionsOneCount: number = 0;
-  userContributionsTwoCount: number = 0;
-
+  userOneProfileData?: ProfileData;
+  userTwoProfileData?: ProfileData;
   userOneWinBoolArr: boolean[];
   userTwoWinBoolArr: boolean[];
 
-  count: number = 0;
 
   constructor(private route: ActivatedRoute, private userservice: UserserviceService) {
-
     this.userTwoWinBoolArr = [false, false, false, false, false, false];
     this.userOneWinBoolArr = [false, false, false, false, false, false];
   }
@@ -39,18 +29,14 @@ export class ComparisonContainerComponent implements OnInit {
     this.userOneWinBoolArr = [false, false, false, false, false, false];
 
     this.route.paramMap.pipe(
-      map(params => params.get('nameone')!),
+      map(params => params.get('nameone')!), // ! because component only get's called when that route parameter exists
       switchMap(nameone => this.userservice.getUser(nameone))
-    ).subscribe(async userdata => {
+    ).subscribe(async userdataOne => {
 
-      let usernameOne = userdata.login;
-      this.userdataOne = userdata
+      let usernameOne = userdataOne.login;
       let usernameTwo = this.route.snapshot.paramMap.get('nametwo')!;
-      this.userdataTwo = await lastValueFrom(this.userservice.getUser(usernameTwo));
+      let _userdataTwo = lastValueFrom(this.userservice.getUser(usernameTwo));
 
-      this.userOneWinBoolArr[1] = this.userdataOne!.followers! > this.userdataTwo.followers;
-      this.userOneWinBoolArr[3] = this.userdataOne!.public_repos! > this.userdataTwo.public_repos;
-      this.userOneWinBoolArr[4] = Date.parse(this.userdataOne!.created_at) < Date.parse(this.userdataTwo!.created_at);
       
       let reposOne = lastValueFrom(this.userservice.getRepositories(usernameOne));
       let reposTwo = lastValueFrom(this.userservice.getRepositories(usernameTwo));
@@ -58,30 +44,42 @@ export class ComparisonContainerComponent implements OnInit {
       let contribPageOne = lastValueFrom(this.userservice.getContributions(usernameOne));
       let contribPageTwo = lastValueFrom(this.userservice.getContributions(usernameTwo));
 
+
+      this.userOneProfileData = {
+        username: userdataOne.login,
+        realname: userdataOne.name,
+        avatar_url: userdataOne.avatar_url,
+        cakeday: userdataOne.created_at,
+        contributions: this.countContributions(await contribPageOne),
+        followers: userdataOne.followers,
+        stargazers: this.countStargazers(await reposOne),
+        public_repos: userdataOne.public_repos
+      }
       
-      this.stargazerOneCount = this.countStargazers(await reposOne)
-      this.stargazerTwoCount = this.countStargazers(await reposTwo)
-      this.userOneWinBoolArr[2] = this.stargazerOneCount > this.stargazerTwoCount;
+      let userdataTwo = await _userdataTwo;
+      
+      this.userOneWinBoolArr[1] = userdataOne!.followers! > userdataTwo.followers;
+      this.userOneWinBoolArr[3] = userdataOne!.public_repos! > userdataTwo.public_repos;
+      this.userOneWinBoolArr[4] = Date.parse(userdataOne!.created_at) < Date.parse(userdataTwo!.created_at);
+      
+      this.userTwoProfileData = {
+        username: userdataTwo.login,
+        realname: userdataTwo.name,
+        avatar_url: userdataTwo.avatar_url,
+        cakeday: userdataTwo.created_at,
+        contributions: this.countContributions(await contribPageTwo),
+        followers: userdataTwo.followers,
+        stargazers: this.countStargazers(await reposTwo),
+        public_repos: userdataTwo.public_repos
+      }
 
-      this.userContributionsOneCount = this.countContributions(await contribPageOne)
-      this.userContributionsTwoCount = this.countContributions(await contribPageTwo);
-      this.userOneWinBoolArr[0] = this.userContributionsOneCount > this.userContributionsTwoCount;
+      this.userOneWinBoolArr[0] = this.userOneProfileData.contributions > this.userTwoProfileData.contributions;
+      this.userOneWinBoolArr[2] = this.userOneProfileData.stargazers > this.userTwoProfileData.stargazers;
 
-      this.count = 0;
-      this.userOneWinBoolArr.forEach((element, index) => { 
-        this.userTwoWinBoolArr[index] = !element;
-        if (element) this.count++; 
-      });
-
-      this.userOneWinBoolArr[5] = this.count > 2
-      this.userTwoWinBoolArr[5] = this.count <= 2;
+      this.countResults();      
     });
 
-
-
-
   }
-
 
   countStargazers(repos: Array<Repository>): number {
     let count = 0;
@@ -98,5 +96,15 @@ export class ComparisonContainerComponent implements OnInit {
     return parseInt(cutString);
   }
 
+  countResults(){
+    let count = 0;
+    this.userOneWinBoolArr.forEach((element, index) => { 
+      this.userTwoWinBoolArr[index] = !element;
+      if (element) count++; 
+    });
+
+    this.userOneWinBoolArr[5] = count > 2
+    this.userTwoWinBoolArr[5] = count <= 2;
+  }
 
 }

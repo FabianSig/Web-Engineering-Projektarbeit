@@ -1,49 +1,33 @@
-.icon-box{
+.icon-box {
   min-width: 50px;
 }
 
-.icon{
+.icon {
   height: 30px;
   width: auto;
-  display:block;
-  margin:auto;
+  display: block;
+  margin: auto;
 }
 
 .spacer {
-    flex: 1 1 auto;
-  }
+  flex: 1 1 auto;
+}
 
-  .footer {
-    position: fixed;
+.footer {
+  position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
-  }
+}
 
 @media only screen and (max-width: 768px) {
-    #searchbardiv {
-        display: flex;
-        flex-wrap: nowrap;
-        flex-direction: column;
-        justify-content: space-between;
-        width: 60%;
-        margin: auto;
-    }
-    .footer{
-      display: none;
-    }
-
-    button{
-        margin-bottom: 22px;
-    }
+  .footer {
+    display: none;
   }
+}
 
-
-
-
-.box{
+.box {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-

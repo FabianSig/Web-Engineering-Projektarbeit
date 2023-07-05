@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Userdata } from '../shared/userdata';
-import { ActivatedRoute } from '@angular/router';
 import { UserserviceService } from '../shared/userservice.service';
 import { Repository } from '../shared/repository';
+import { ProfileData } from '../shared/profile-data';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-about',
@@ -10,73 +10,38 @@ import { Repository } from '../shared/repository';
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent {
-  usernameOne: string = "fabiansig";
-  usernameTwo?: string = "NikomitK";
+  usernameFabian: string = "fabiansig";
+  usernameNiko: string = "NikomitK";
 
-  userdataOne?: Userdata;
-  userdataTwo?: Userdata;
+  userdataOne?: ProfileData;
+  userdataTwo?: ProfileData;
 
+  constructor(private userservice: UserserviceService) {
+}
+  async ngOnInit(): Promise<void> {
+    let userOne = await lastValueFrom(this.userservice.getUser(this.usernameFabian));
+    this.userdataOne = {
+      username: userOne.login,
+      realname: userOne.name,
+      avatar_url: userOne.avatar_url,
+      cakeday: userOne.created_at,
+      contributions: this.countContributions(await lastValueFrom(this.userservice.getContributions(userOne.login))),
+      followers: userOne.followers,
+      public_repos: userOne.public_repos,
+      stargazers: this.countStargazers(await lastValueFrom(this.userservice.getRepositories(userOne.login))),
+    }
 
-
-  stargazerOneCount: number = 0;
-  stargazerTwoCount: number = 0;
-
-  userContributionsOneCount: number = 0;
-  userContributionsTwoCount: number = 0;
-
-  userOneWinBoolArr: boolean[];
-  userTwoWinBoolArr: boolean[];
-
-  count: number = 0;
-
-
-  constructor(private route: ActivatedRoute, private userservice: UserserviceService) {
-
-    this.userTwoWinBoolArr = [false, false, false, false, false, false];
-    this.userOneWinBoolArr = [false, false, false, false, false, false];
-  }
-  ngOnInit(): void {
-
-
-    this.userTwoWinBoolArr = [false, false, false, false, false, false];
-    this.userOneWinBoolArr = [false, false, false, false, false, false];
-
-    this.userservice.getUser('fabiansig')
-      .subscribe(userdata => {
-
-        this.userdataOne = userdata
-        this.userservice.getUser('nikomitk')
-          .subscribe(userdata => {
-
-            this.userdataTwo = userdata
-
-            this.userservice.getRepositories('fabiansig')
-              .subscribe(repos => {
-
-                this.stargazerOneCount = this.countStargazers(repos)
-                this.userservice.getRepositories('nikomitk')
-                  .subscribe(repos => {
-
-                    this.stargazerTwoCount = this.countStargazers(repos)
-                    this.userservice.getContributions('fabiansig')
-                      .subscribe(contributions => {
-
-                        this.userContributionsOneCount = this.countContributions(contributions)
-                        this.userservice.getContributions('nikomitk')
-                          .subscribe(contributions => {
-
-                            this.userContributionsTwoCount = this.countContributions(contributions);
-
-
-                          });
-
-                      });
-                  });
-              });
-
-
-          });
-      });
+    let userTwo = await lastValueFrom(this.userservice.getUser(this.usernameNiko));
+    this.userdataTwo = {
+      username: userTwo.login,
+      realname: userTwo.name,
+      avatar_url: userTwo.avatar_url,
+      cakeday: userTwo.created_at,
+      contributions: this.countContributions(await lastValueFrom(this.userservice.getContributions(userTwo.login))),
+      followers: userTwo.followers,
+      public_repos: userTwo.public_repos,
+      stargazers: this.countStargazers(await lastValueFrom(this.userservice.getRepositories(userTwo.login))),
+    }
 
   }
 

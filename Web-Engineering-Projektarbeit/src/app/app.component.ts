@@ -12,22 +12,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class AppComponent {
   title = 'Web-Engineering-Projektarbeit';
 
-  nameFormGroup = this.fb.group({
-    userOneControl: ['', Validators.required],
-    userTwoControl: ['', Validators.required]
-  })
-
   constructor(private router: Router, private titleService:Title, private fb: FormBuilder) {
-    console.log(this.router.url)
     this.titleService.setTitle("GitHub-Compare");
    }
-
-  goCompare(){
-    if(this.nameFormGroup.valid){
-      this.router
-      .navigate(
-        [`/compare/${this.nameFormGroup.get("userOneControl")?.value}/${this.nameFormGroup.get("userTwoControl")?.value}`]);
-    }
-  }
 
 }

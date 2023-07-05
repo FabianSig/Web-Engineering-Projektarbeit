@@ -1,26 +1,14 @@
-import { Component, Input, OnInit} from '@angular/core';
-import { Userdata } from '../shared/userdata';
-import { UserserviceService } from '../shared/userservice.service';
+import { Component, Input } from '@angular/core';
+import { ProfileData } from '../shared/profile-data';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css']
 })
-export class UserProfileComponent implements OnInit{
+export class UserProfileComponent {
 
-  @Input() userdata?: Userdata;
-  @Input() stargazerCount?: number;
-  @Input() contributionsCount?: number;
-  @Input() userWinarr?: boolean[];
-  constructor(private userservice: UserserviceService){
-
-  }
-
-  ngOnInit(): void {
-    
-  }
-
-
-
+  @Input() profileData?: ProfileData;
+  @Input() userWinarr: boolean[] = [false, false, false, false, false, false];
+  
 }

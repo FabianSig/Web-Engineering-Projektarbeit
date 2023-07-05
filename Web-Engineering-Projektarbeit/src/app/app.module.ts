@@ -12,7 +12,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ComparisonContainerComponent } from './comparison-container/comparison-container.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { HttpClientModule } from  '@angular/common/http';
-import { GraphQLModule } from './graphql.module';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { CompareComponent } from './compare/compare.component';
 import { AboutComponent } from './about/about.component';
@@ -36,7 +35,6 @@ import { AboutComponent } from './about/about.component';
     FormsModule,
     HttpClientModule,
     MatIconModule,
-    GraphQLModule,
     ReactiveFormsModule
   ],
   providers: [],

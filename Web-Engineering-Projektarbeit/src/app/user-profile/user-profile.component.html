@@ -1,10 +1,10 @@
 
-<mat-card *ngIf="userdata" [ngClass] ="{'winner': userWinarr![5]}"> 
+<mat-card *ngIf="profileData" [ngClass] ="{'winner': userWinarr[5]}"> 
     <mat-card-header>
-        <img mat-card-avatar [src]="userdata.avatar_url">
-        <mat-card-title> {{ userdata.login }} </mat-card-title>
-        <mat-card-subtitle> {{ userdata.name }}</mat-card-subtitle>
-        <mat-card-subtitle [ngClass] = "{'green' : userWinarr![4]}"> Beigetreten am: {{ userdata.created_at | date:'mediumDate'}} </mat-card-subtitle>
+        <img mat-card-avatar [src]="profileData.avatar_url">
+        <mat-card-title> {{ profileData.username }} </mat-card-title>
+        <mat-card-subtitle> {{ profileData.realname }}</mat-card-subtitle>
+        <mat-card-subtitle [ngClass] = "{'green' : userWinarr[4]}"> Beigetreten am: {{ profileData.cakeday | date:'mediumDate'}} </mat-card-subtitle>
     </mat-card-header>
     <br>
       <mat-card-content>
@@ -12,29 +12,29 @@
           <div class="comparison-item-row-icon-box">
             <img mat-card-image src="assets/img/git-commit.svg" class="comparison-item-row-icon">
           </div>
-            <div class="comparison-item-row-title" [ngClass] = "{'green' : userWinarr![0]}">Contributions</div>
-            <span class="comparison-item-row-value" [ngClass] = "{'green' : userWinarr![0]}"> {{ contributionsCount }} </span>
+            <div class="comparison-item-row-title" [ngClass] = "{'green' : userWinarr[0]}">Contributions</div>
+            <span class="comparison-item-row-value" [ngClass] = "{'green' : userWinarr[0]}"> {{ profileData.contributions }} </span>
         </div>
         <div class="comparison-item-row">
           <div class="comparison-item-row-icon-box">
             <img mat-card-image src="assets/img/follower.png" class="comparison-item-row-icon" style="height: 20px;">
           </div>
-          <div class="comparison-item-row-title" [ngClass] = "{'green' : userWinarr![1]}">Followers</div>
-          <span class="comparison-item-row-value" [ngClass] = "{'green' : userWinarr![1]}">{{ userdata.followers }}</span>
+          <div class="comparison-item-row-title" [ngClass] = "{'green' : userWinarr[1]}">Followers</div>
+          <span class="comparison-item-row-value" [ngClass] = "{'green' : userWinarr[1]}">{{ profileData.followers }}</span>
         </div>
         <div class="comparison-item-row">
           <div class="comparison-item-row-icon-box">
             <img mat-card-image src="assets/img/star.svg" class="comparison-item-row-icon" style="height: 23px;">
           </div>
-          <div class="comparison-item-row-title" [ngClass] = "{'green' : userWinarr![2]}"> Stargazers </div>
-          <span class="comparison-item-row-value" [ngClass] = "{'green' : userWinarr![2]}">{{ stargazerCount }}</span>
+          <div class="comparison-item-row-title" [ngClass] = "{'green' : userWinarr[2]}"> Stargazers </div>
+          <span class="comparison-item-row-value" [ngClass] = "{'green' : userWinarr[2]}">{{ profileData.stargazers }}</span>
         </div>
         <div class="comparison-item-row">
           <div class="comparison-item-row-icon-box">
             <img mat-card-image src="assets/img/book.png" class="comparison-item-row-icon" style="height: 23px;">
           </div>
-          <div class="comparison-item-row-title" [ngClass] = "{'green' : userWinarr![3]}"> Öffentliche Repositories </div>
-          <span class="comparison-item-row-value" [ngClass] = "{'green' : userWinarr![3]}">{{ userdata.public_repos }}</span>
+          <div class="comparison-item-row-title" [ngClass] = "{'green' : userWinarr[3]}"> Öffentliche Repositories </div>
+          <span class="comparison-item-row-value" [ngClass] = "{'green' : userWinarr[3]}">{{ profileData.public_repos }}</span>
         </div>
 
       </mat-card-content>

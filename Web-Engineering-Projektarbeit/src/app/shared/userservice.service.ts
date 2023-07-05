@@ -18,8 +18,8 @@ export class UserserviceService {
   }
 
   handleError(error: HttpErrorResponse) {
-    if (error.status === 0) console.error("client error lol");
-    else if (error.status === 404 || error.status === 403) {
+    if (error.status === 0) console.error("client error");
+    else {
       console.error("user not found");
       const _nouserdata = new BehaviorSubject<Userdata>({
         login: "Nutzer nicht gefunden",
@@ -31,10 +31,6 @@ export class UserserviceService {
         public_repos: 0
       })
       return _nouserdata.asObservable();
-    }
-    else {
-      console.error(
-        `Backend returned code ${error.status}, body was: `, error.error);
     }
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
