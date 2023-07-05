@@ -113,7 +113,7 @@ export class ComparisonContainerComponent implements OnInit {
                   this.userOneWinBoolArr[5] = this.count > 2
                   this.userTwoWinBoolArr[5] = this.count <= 2;
 
-                  this.canon(0.65, 0.6)
+                  //this.canon(0.65, 0.6)
                   
                 });
 
